@@ -1,0 +1,8 @@
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\VenusChallengeGUI.exe
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\VenusChallengeGUI.pdb
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.csprojResolveAssemblyReference.cache
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.exe
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.pdb
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.Client.resources
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.csproj.GenerateResource.Cache

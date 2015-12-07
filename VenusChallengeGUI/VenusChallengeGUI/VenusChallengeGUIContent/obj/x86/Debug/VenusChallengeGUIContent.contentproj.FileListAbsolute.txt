@@ -1,0 +1,1 @@
+c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUIContent\obj\x86\Debug\VenusChallengeGUIContent.contentprojResolveAssemblyReference.cache
