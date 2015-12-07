@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace VenusChallengeGUI
 {
@@ -18,10 +15,10 @@ namespace VenusChallengeGUI
         List<string> stones = new List<string>();
         List<string> water = new List<string>();
         List<Tank> tankList = new List<Tank>();
-        
+
         int x;
         int y;
-        
+
 
         public GameGrid()
         {
@@ -30,10 +27,11 @@ namespace VenusChallengeGUI
             mytank.setGrid(this);
             x = 0;
             y = 0;
-          
+
 
         }
-        public void setTank(int x,int y){
+        public void setTank(int x, int y)
+        {
             gameGrid[x, y] = mytank;
         }
         public void setMapDetails(String m) //add received map data in to the game grid
@@ -41,9 +39,9 @@ namespace VenusChallengeGUI
             m = m.Remove(m.Length - 2);
             string[] mapDetails = new string[5];
             mapDetails = m.Split(':');
-            
+
             mytank.setPlayerName(mapDetails[1].Substring(1));
-            
+
             bricks.AddRange(mapDetails[2].Split(';'));
             stones.AddRange(mapDetails[3].Split(';'));
             water.AddRange(mapDetails[4].Split(';'));
@@ -67,7 +65,7 @@ namespace VenusChallengeGUI
             {
                 int q = Int32.Parse(s.Split(',')[0]);
                 int w = Int32.Parse(s.Split(',')[1]);
-                gameGrid[w,q] = new Water(q, w);
+                gameGrid[w, q] = new Water(q, w);
             }
 
         }
@@ -93,7 +91,7 @@ namespace VenusChallengeGUI
 
         public void setGlobalUpdate(string updatedValues) // once per second server will broadcast all the details about what happend in the gamegrid.
         {
-            
+
             updatedValues = updatedValues.Remove(updatedValues.Length - 2);
             string[] c = updatedValues.Split(':');
             Console.Write(updatedValues);
@@ -101,45 +99,45 @@ namespace VenusChallengeGUI
             int q = mytank.prevY;
             Console.WriteLine("p" + p);
             Console.WriteLine("p" + q);
-            
-           // updateDamages(c[c.Length - 1]);
+
+            // updateDamages(c[c.Length - 1]);
             IDictionary<string, Tank> col = new Dictionary<string, Tank>();
             for (int i = 0; i < c.Length - 2; i++)
             {
-               
-                
+
+
                 if (i == Int32.Parse(mytank.playerName))
                 {
-                    
-                    mytank.globalUpdate(c[i+1]);
-                    Console.WriteLine(c[i+1]);
-                    
-                    
-                    if ((p == x && q == y) || (x==null))
+
+                    mytank.globalUpdate(c[i + 1]);
+                    Console.WriteLine(c[i + 1]);
+
+
+                    if ((p == x && q == y) || (x == null))
                     {
-                     
+
                     }
                     else
                     {
-                        
+
                         mytank.prevX = x;
                         mytank.prevY = y;
 
                         this.gameGrid[p, q] = null;
                     }
                     string[] cl = c[i + 1].Split(';');
-                     y = Int32.Parse(cl[1].ElementAt(0).ToString());
-                     x = Int32.Parse(cl[1].ElementAt(2).ToString());
-                
-                    this.gameGrid[x,y] = mytank;
+                    y = Int32.Parse(cl[1].ElementAt(0).ToString());
+                    x = Int32.Parse(cl[1].ElementAt(2).ToString());
+
+                    this.gameGrid[x, y] = mytank;
                 }
                 else
                 {
-                    
+
                     string[] cl = c[i + 1].Split(';');
-                   
-                        tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
-                    
+
+                    tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
+
                     y = Int32.Parse(cl[1].ElementAt(0).ToString());
                     x = Int32.Parse(cl[1].ElementAt(2).ToString());
                     tankList.Last().globalUpdate(c[i + 1]);
@@ -148,9 +146,9 @@ namespace VenusChallengeGUI
 
 
 
-                   
+
                 }
-                
+
                 Console.WriteLine("preX  " + mytank.prevX);
                 Console.WriteLine("preY  " + mytank.prevY);
                 Console.WriteLine("X  " + x);
@@ -186,12 +184,12 @@ namespace VenusChallengeGUI
             int LT = Int32.Parse(coinDetails[2]);
             int val = Int32.Parse(coinDetails[3]);
             Coin c = new Coin(coin_x, coin_y, LT, val);
-         
+
             this.gameGrid[coin_x, coin_y] = new Coin(coin_y, coin_x, LT, val);
-           
+
             // the code that you want to measure comes here
-           
-            
+
+
         }
         public void getLifePacksDetails(string lpmessage)
         {
@@ -200,7 +198,7 @@ namespace VenusChallengeGUI
 
             lpDetails = lpmessage.Split(':');
             int lp_y = Int32.Parse(lpDetails[1].Split(',')[0]);
-            int lp_x= Int32.Parse(lpDetails[1].Split(',')[1]);
+            int lp_x = Int32.Parse(lpDetails[1].Split(',')[1]);
             int LT = Int32.Parse(lpDetails[2]);
             this.gameGrid[lp_x, lp_y] = new LifePack(lp_y, lp_x, LT);
         }
@@ -243,7 +241,7 @@ namespace VenusChallengeGUI
             this.displayGrid();
 
         }
-       
+
     }
 
 }

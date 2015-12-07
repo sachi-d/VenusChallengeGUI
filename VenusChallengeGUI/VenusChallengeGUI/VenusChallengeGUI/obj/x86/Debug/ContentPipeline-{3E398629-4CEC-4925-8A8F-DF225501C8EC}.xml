@@ -8,10 +8,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUIContent\</RootDirectory>
-      <LoggerRootDirectory>c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\</LoggerRootDirectory>
-      <IntermediateDirectory>c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>c:\users\sachi\documents\visual studio 2013\Projects\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUIContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

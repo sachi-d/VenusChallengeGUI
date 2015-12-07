@@ -1,15 +1,13 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
-namespace VenusTankv_v1
+namespace VenusChallengeGUI
 {
     public struct CellData
     {
@@ -17,11 +15,7 @@ namespace VenusTankv_v1
         public int health;
         public string type;
     }
-    public struct Tank
-    {
-        public Vector2 tankPos;
-        public float Angle;
-    }
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -48,6 +42,8 @@ namespace VenusTankv_v1
 
         int upcount = 0;
 
+        //Client clientconnection;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -67,7 +63,7 @@ namespace VenusTankv_v1
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Venus Challenge - Tank Game";
-
+            //clientconnection = new Client();
             //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f);
 
             base.Initialize();
@@ -90,7 +86,7 @@ namespace VenusTankv_v1
             waterTexture = Content.Load<Texture2D>("water");
             tankTexture = Content.Load<Texture2D>("tank");
             myt = new Tank();
-            myt.Angle = 0;
+            myt.angle = 0;
             screenWidth = device.PresentationParameters.BackBufferWidth;
             screenHeight = device.PresentationParameters.BackBufferHeight;
             SetUpGrid();
@@ -149,28 +145,15 @@ namespace VenusTankv_v1
         private void DrawTank()
         {
 
-            myt.tankPos = new Vector2(330, 66);
+            myt.pos = new Vector2(330, 66);
 
             Vector2 rotationPoint = new Vector2(30, 30);
-            spriteBatch.Draw(tankTexture, myt.tankPos, null, Color.White, myt.Angle, rotationPoint, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(tankTexture, myt.pos, null, Color.White, myt.angle, rotationPoint, 1, SpriteEffects.None, 1);
 
         }
         private void ProcessKeyboard()
         {
-            KeyboardState keybState = Keyboard.GetState();
-            if (keybState.IsKeyDown(Keys.Left))
-            {
-                Console.WriteLine(myt.Angle);
-                myt.Angle -= MathHelper.ToRadians(90);
-            }
-            if (keybState.IsKeyDown(Keys.Right))
-            {
-                myt.Angle += MathHelper.ToRadians(90);
-            }
-            if (keybState.IsKeyDown(Keys.Space))
-            {
-                Console.WriteLine("SPACE PRESSED!!!");
-            }
+            
         }
 
 

@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
-using System.Drawing;
-using System.Collections;
+using System.Windows.Forms;
 
-namespace MyTankGame
+namespace VenusChallengeGUI
 {
-    public partial class Client : Form
+    public partial class Client2 : Form
     {
-        GameGrid grid = null;
-        Tank myTank = new Tank();
+
+        //GameGrid grid = null;
+        //Tank myTank = new Tank();
         private NetworkStream clientStream; //Stream - outgoing
         private TcpClient client; //To talk back to the client
         private BinaryWriter writer; //To write to the clients
@@ -26,24 +29,20 @@ namespace MyTankGame
         int serverPort = 6000;
         int clientPort = 7000;
         Thread receive_thread;
-        public Client()
+        public Client2()
         {
             InitializeComponent();
-            grid = new GameGrid();
+            //grid = new GameGrid();
         }
 
-        private void Join_btn_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             SendData("JOIN#");
             startRecieve();
-            Join_Btn.Enabled = false;
+            button1.Enabled = false;
         }
 
-        private void Send_btn_Click(object sender, EventArgs e)
-        {
-            String command = textBox1.Text;
-            SendData(command);
-        }
+
 
         public void startRecieve()
         {
@@ -102,7 +101,7 @@ namespace MyTankGame
                         //   dataObj = new DataObject(reply.Substring(0, reply.Length - 1), ip, port);
                         //String message = reply.Substring(0, reply.Length - 1);
                         // ThreadPool.QueueUserWorkItem(new WaitCallback(Program.Resolve),message);
-                        grid.readServerMessage(reply);
+                        //grid.readServerMessage(reply);
 
                     }
                 }
@@ -192,5 +191,6 @@ namespace MyTankGame
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
+
     }
 }
