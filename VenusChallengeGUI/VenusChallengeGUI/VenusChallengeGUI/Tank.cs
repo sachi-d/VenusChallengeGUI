@@ -8,7 +8,7 @@ namespace VenusChallengeGUI
     class Tank : GameEntity
     {
 
-        int direction;
+        public float todirection;
         public int prevX;
         public int prevY;
         public int health;
@@ -25,7 +25,7 @@ namespace VenusChallengeGUI
             angle = 0;
             coins = 0;
             points = 0;
-            direction = 0;
+            todirection = 0;
             whetherShot = false;
             health = 0;
             status = true;
@@ -38,7 +38,7 @@ namespace VenusChallengeGUI
 
             coins = 0;
             points = 0;
-            direction = 0;
+            todirection = 0;
             whetherShot = false;
             health = 0;
             status = true;
@@ -65,7 +65,7 @@ namespace VenusChallengeGUI
             message = l.Split(':', ';', ',');
             x = Int32.Parse(message[2]);
             y = Int32.Parse(message[3]);
-            direction = Int32.Parse(message[4]);
+            angle = Int32.Parse(message[4]);
             setPlayerName(message[1].ElementAt(1).ToString());
             grid.gameGrid[x, y] = this;
 
@@ -81,7 +81,7 @@ namespace VenusChallengeGUI
             Console.WriteLine("glovbal method updating");
             string[] c = updatedValues.Split(';');
 
-            direction = Int32.Parse(c[2]);
+            angle = Int32.Parse(c[2]);
             Console.WriteLine("updated direction");
             if (Int32.Parse(c[3]) != 0)
             {
@@ -92,33 +92,43 @@ namespace VenusChallengeGUI
             points = Int32.Parse(c[6]);
             Console.WriteLine("name- -" + playerName + "health- -" + health + "coins- -" + coins + "points - " + points + "");
         }
-        //public void move(string command)
-        //{ // get the command and check the irection of the tank facing
-        //    int dir = -1;
-        //    if (command == "UP")
-        //    {
-        //        dir = 0;
-        //    }
-        //    else if (command == "DOWN")
-        //    {
-        //        dir = 1;
-        //    }
-        //    else if (command == "RIGHT")
-        //    {
-        //        dir = 1;
-        //    }
-        //    else if (command == "LEFT")
-        //    {
-        //        dir = 1;
-        //    }
-        //    rotate(dir);
-        //    if (grid.gameGrid[nextX, nextY].ToString() == "")
-        //    {
-        //        x = nextX;
-        //        y = nextY;
-        //    }
 
-        //}
+        public void move(string command)
+        { // get the command and check the irection of the tank facing
+            
+            if (command.Equals("UP#"))
+            {
+                todirection = 0;
+            }
+            else if (command.Equals("DOWN#"))
+            {
+                todirection = 2;
+            }
+            else if (command.Equals("RIGHT#"))
+            {
+                todirection = 1;
+            }
+            else if (command.Equals("LEFT#"))
+            {
+                todirection = 3;
+            }
+
+            if (todirection == angle)
+            {
+                //move forward
+            }
+            else
+            {
+                angle = todirection;
+            }
+            //rotate(dir);
+            //if (grid.gameGrid[nextX, nextY].ToString() == "")
+            //{
+            //    x = nextX;
+            //    y = nextY;
+            //}
+
+        }
 
         //public void rotate(int dir)
         //{ // get the direction of the next command.

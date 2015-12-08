@@ -15,9 +15,6 @@ namespace VenusChallengeGUI
 {
     public partial class Client2 : Form
     {
-
-        //GameGrid grid = null;
-        //Tank myTank = new Tank();
         private NetworkStream clientStream; //Stream - outgoing
         private TcpClient client; //To talk back to the client
         private BinaryWriter writer; //To write to the clients
@@ -29,10 +26,12 @@ namespace VenusChallengeGUI
         int serverPort = 6000;
         int clientPort = 7000;
         Thread receive_thread;
-        public Client2()
+
+        Game1 game;
+        public Client2(Game1 g)
         {
             InitializeComponent();
-            //grid = new GameGrid();
+            game = g;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -163,33 +162,38 @@ namespace VenusChallengeGUI
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            string x = "empty";
             Console.WriteLine("check");
             if (keyData == Keys.Left)
             {
-                SendData("LEFT#");
-                return true;
+                x = "LEFT#";
             }
             else if (keyData == Keys.Right)
             {
-                SendData("RIGHT#");
-                return true;
+                x = "RIGHT#";
             }
             else if (keyData == Keys.Up)
             {
-                SendData("UP#");
-                return true;
+                x = "UP#";
             }
             else if (keyData == Keys.Down)
             {
-                SendData("DOWN#");
-                return true;
+                x = "DOWN#";
             }
             else if (keyData == Keys.Space)
             {
-                SendData("SHOOT#");
+                x = "SHOOT#";
+            }
+
+            if (!x.Equals("null"))
+            {
+                SendData(x);
+                game.Communicate(x);
                 return true;
             }
-            return base.ProcessCmdKey(ref msg, keyData);
+                return base.ProcessCmdKey(ref msg, keyData);
+            
+            
         }
 
     }

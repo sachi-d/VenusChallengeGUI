@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Windows.Forms;
 
 namespace VenusChallengeGUI
 {
@@ -32,22 +33,28 @@ namespace VenusChallengeGUI
         Texture2D waterTexture;
         Texture2D foregroundTexture;
         Texture2D tankTexture;
+        Texture2D lifepackTexture;
+        Texture2D coinTexture;
 
         int screenWidth;
         int screenHeight;
 
         CellData[,] grid;
-        Tank myt;
+        GameGrid gamegrid;
         int cellcount = 10;
 
         int upcount = 0;
 
-        //Client clientconnection;
+        Client2 clientconnection;
 
         public Game1()
         {
+            
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            gamegrid = new GameGrid(this);
+            //clientconnection = cli;
+
         }
 
         /// <summary>
@@ -63,9 +70,6 @@ namespace VenusChallengeGUI
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Venus Challenge - Tank Game";
-            //clientconnection = new Client();
-            //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f);
-
             base.Initialize();
         }
 
@@ -85,11 +89,14 @@ namespace VenusChallengeGUI
             stoneTexture = Content.Load<Texture2D>("stone");
             waterTexture = Content.Load<Texture2D>("water");
             tankTexture = Content.Load<Texture2D>("tank");
-            myt = new Tank();
-            myt.angle = 0;
+            lifepackTexture = Content.Load<Texture2D>("lifepack");
+            coinTexture = Content.Load<Texture2D>("coin");
+            gamegrid.mytank.angle = 0;
             screenWidth = device.PresentationParameters.BackBufferWidth;
             screenHeight = device.PresentationParameters.BackBufferHeight;
             SetUpGrid();
+
+            
         }
 
         /// <summary>
@@ -112,10 +119,8 @@ namespace VenusChallengeGUI
             {
                 upcount = 0;
                 // Allows the game to exit
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     this.Exit();
-
-                ProcessKeyboard();
 
                 base.Update(gameTime);
 
@@ -139,21 +144,18 @@ namespace VenusChallengeGUI
             DrawTank();
 
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
         private void DrawTank()
         {
 
-            myt.pos = new Vector2(330, 66);
+            gamegrid.mytank.pos = new Vector2(330, 66);
 
             Vector2 rotationPoint = new Vector2(30, 30);
-            spriteBatch.Draw(tankTexture, myt.pos, null, Color.White, myt.angle, rotationPoint, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(tankTexture, gamegrid.mytank.pos, null, Color.White, gamegrid.mytank.angle, rotationPoint, 1, SpriteEffects.None, 1);
 
-        }
-        private void ProcessKeyboard()
-        {
-            
         }
 
 
@@ -223,6 +225,21 @@ namespace VenusChallengeGUI
                         grid[i, j].type = "cell";
                     }
                 }
+            }
+        }
+
+        public void Communicate(string msg)
+        {
+            switch (msg)
+            {
+                case "UP#":
+                case "DOWN#":
+                case "LEFT#":
+                case "RIGHT#":
+                    gamegrid.mytank.move(msg);
+                    break;
+                default:
+                    break;
             }
         }
     }

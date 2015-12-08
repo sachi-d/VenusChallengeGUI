@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VenusChallengeGUI", "VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI.csproj", "{0B57DEDB-B082-47C0-BD8A-A97FCF2689FD}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "VenusChallengeGUIContent", "VenusChallengeGUI\VenusChallengeGUIContent\VenusChallengeGUIContent.contentproj", "{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -17,8 +15,6 @@ Global
 		{0B57DEDB-B082-47C0-BD8A-A97FCF2689FD}.Debug|x86.Build.0 = Debug|x86
 		{0B57DEDB-B082-47C0-BD8A-A97FCF2689FD}.Release|x86.ActiveCfg = Release|x86
 		{0B57DEDB-B082-47C0-BD8A-A97FCF2689FD}.Release|x86.Build.0 = Release|x86
-		{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}.Debug|x86.ActiveCfg = Debug|x86
-		{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -64,6 +64,24 @@
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\water.xnb</Output>
       <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
+    <Item>
+      <Source>lifepack.png</Source>
+      <Name>lifepack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\lifepack.xnb</Output>
+      <Time>2015-12-08T11:23:01.6642826+05:30</Time>
+    </Item>
+    <Item>
+      <Source>coin.png</Source>
+      <Name>coin</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
+      <Time>2015-12-08T11:27:56.4400132+05:30</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}</ContentProjectGUID>

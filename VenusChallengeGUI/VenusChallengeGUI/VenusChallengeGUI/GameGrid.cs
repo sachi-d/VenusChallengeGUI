@@ -19,8 +19,10 @@ namespace VenusChallengeGUI
         int x;
         int y;
 
+        Game1 game;
 
-        public GameGrid()
+
+        public GameGrid(Game1 g)
         {
             gameGrid = new GameEntity[10, 10];
             mytank = new Tank();

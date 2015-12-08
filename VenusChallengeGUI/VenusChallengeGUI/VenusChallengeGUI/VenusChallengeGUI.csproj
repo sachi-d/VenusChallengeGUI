@@ -86,6 +86,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="GameEntity.cs" />
     <Compile Include="GameGrid.cs" />
+    <Compile Include="Init.cs" />
     <Compile Include="LifePack.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
