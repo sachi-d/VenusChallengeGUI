@@ -7,7 +7,7 @@ namespace VenusChallengeGUI
 {
     class GameGrid
     {
-        public Tank mytank;
+        public MyTank mytank;
         public GameEntity[,] gameGrid;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
@@ -38,7 +38,7 @@ namespace VenusChallengeGUI
                     gameGrid[i, j] = new GameEntity();
                 }
             }
-                mytank = new Tank();
+                mytank = new MyTank();
             mytank.setGrid(this);
             x = 0;
             y = 0;
@@ -134,7 +134,7 @@ namespace VenusChallengeGUI
                     Console.WriteLine(c[i + 1]);
 
 
-                    if ((p == x && q == y) || (x == null))
+                    if ((p == x && q == y))        //|| (x == null)
                     {
 
                     }
@@ -254,7 +254,7 @@ namespace VenusChallengeGUI
                 s = "life packs!";
                 getLifePacksDetails(message);
             }
-            this.displayGrid();
+            //this.displayGrid();
 
         }
 

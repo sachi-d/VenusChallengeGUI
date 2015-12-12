@@ -35,6 +35,10 @@ namespace VenusChallengeGUI
         Texture2D tankTexture;
         Texture2D lifepackTexture;
         Texture2D coinTexture;
+        Texture2D op1Texture;
+        Texture2D op2Texture;
+        Texture2D op3Texture;
+        Texture2D op4Texture;
 
         int screenWidth = 1200; //FIXED BACKGROUND WIDTH
         int screenHeight = 675;   //FIXED BACKGROUNDHEIGHT
@@ -98,6 +102,10 @@ namespace VenusChallengeGUI
             tankTexture = Content.Load<Texture2D>("tank");
             lifepackTexture = Content.Load<Texture2D>("lifepack");
             coinTexture = Content.Load<Texture2D>("coin");
+            op1Texture = Content.Load<Texture2D>("op1");
+            op2Texture = Content.Load<Texture2D>("op2");
+            op3Texture = Content.Load<Texture2D>("op3");
+            op4Texture = Content.Load<Texture2D>("op4");
             gamegrid.mytank.angle = 0;
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
@@ -150,18 +158,18 @@ namespace VenusChallengeGUI
             spriteBatch.Begin();
             DrawScenery();
             DrawCells();
-            DrawTank();
+            //DrawTank();
 
             spriteBatch.End();
 
             base.Draw(gameTime);
         }
 
-        private void DrawTank()
+        private void DrawTank(Tank t,Texture2D tex)
         {
-            //spriteBatch.Draw(tankTexture, gamegrid.mytank.pos, null, Color.White, gamegrid.mytank.angle, gamegrid.mytank.rotationPoint, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(tex, t.pos, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 1);
         }
-
+        public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
         private void DrawScenery()
         {
@@ -198,11 +206,24 @@ namespace VenusChallengeGUI
                         case "LP":
                             tex = lifepackTexture;
                             break;
-                        //default:
-                        //    tex = lifepackTexture;
-                        //    break;
+                        case "MYTANK":
+                            tex=tankTexture;
+                            break;
+
+                        default:
+                            tex = cellTexture;
+                            break;
                     }
-                    spriteBatch.Draw(tex, mpos, Color.White);
+                    switch (m.ToString())
+                    {
+                        case "MYTANK":
+                            DrawTank(gamegrid.mytank, tex);
+                            break;
+                        default:
+                            spriteBatch.Draw(tex, mpos, Color.White);
+                            break;
+                    }
+                    
                 }
             }
 

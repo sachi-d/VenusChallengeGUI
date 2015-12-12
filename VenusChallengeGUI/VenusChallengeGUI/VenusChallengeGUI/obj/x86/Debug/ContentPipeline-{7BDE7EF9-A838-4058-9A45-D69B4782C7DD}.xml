@@ -82,6 +82,42 @@
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
       <Time>2015-12-08T17:12:34.424818+05:30</Time>
     </Item>
+    <Item>
+      <Source>op1.png</Source>
+      <Name>op1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op1.xnb</Output>
+      <Time>2015-12-12T23:33:59.0976295+05:30</Time>
+    </Item>
+    <Item>
+      <Source>op2.png</Source>
+      <Name>op2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op2.xnb</Output>
+      <Time>2015-12-12T23:33:51.2367848+05:30</Time>
+    </Item>
+    <Item>
+      <Source>op3.png</Source>
+      <Name>op3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op3.xnb</Output>
+      <Time>2015-12-12T23:33:40.4583553+05:30</Time>
+    </Item>
+    <Item>
+      <Source>op4.png</Source>
+      <Name>op4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op4.xnb</Output>
+      <Time>2015-12-12T23:33:21.138601+05:30</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}</ContentProjectGUID>

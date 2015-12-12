@@ -106,6 +106,8 @@ namespace VenusChallengeGUI
                         // ThreadPool.QueueUserWorkItem(new WaitCallback(Program.Resolve),message);
                         //grid.readServerMessage(reply);
 
+                        game.readMessage(reply);
+
                     }
                 }
             }

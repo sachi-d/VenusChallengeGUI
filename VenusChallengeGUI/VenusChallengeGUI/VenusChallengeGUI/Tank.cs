@@ -17,7 +17,7 @@ namespace VenusChallengeGUI
         public bool whetherShot;
         public bool status;
         public float angle;
-        public Vector2 rotationPoint;
+        public Vector2 rotationPoint=new Vector2(30,30);
         GameGrid grid;//the game grid this tank belongs to
         String respond;
         public Tank()
@@ -42,7 +42,7 @@ namespace VenusChallengeGUI
             health = 0;
             status = true;
             respond = "";
-            playerName = l + l;
+            playerName = l;
 
         }
         public void setGrid(GameGrid g)
@@ -51,9 +51,7 @@ namespace VenusChallengeGUI
         }
         public void setPlayerName(String l)
         {
-            playerName = l + l;
-            Console.WriteLine(playerName);
-
+            playerName = l;
         }
 
         public void setLocation(String l) // Go to the initial setup location.
@@ -222,6 +220,11 @@ namespace VenusChallengeGUI
             }
         }
 
+        public override string ToString()
+        {
+            return "P"+playerName;
+        }
+
     }
 
     class MyTank : Tank
@@ -232,6 +235,10 @@ namespace VenusChallengeGUI
 
         }
 
+        //public override string ToString()
+        //{
+        //    return "MYTANK";
+        //}
 
     }
 
