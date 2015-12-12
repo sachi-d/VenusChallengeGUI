@@ -36,23 +36,28 @@ namespace VenusChallengeGUI
         Texture2D lifepackTexture;
         Texture2D coinTexture;
 
-        int screenWidth;
-        int screenHeight;
+        int screenWidth = 1200; //FIXED BACKGROUND WIDTH
+        int screenHeight = 675;   //FIXED BACKGROUNDHEIGHT
+        int cellsize = 60;      //FIXED CELL WIDTH
 
-        CellData[,] grid;
+        int topBoundary;
+        int leftBoundary;
+
         GameGrid gamegrid;
-        int cellcount = 10;
+        int cellcount;
 
         int upcount = 0;
 
-        Client2 clientconnection;
 
         public Game1()
         {
-            
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             gamegrid = new GameGrid(this);
+            cellcount = gamegrid.size;
+            topBoundary = (screenHeight - (cellcount * cellsize)) / 2;
+            leftBoundary = (screenWidth - (cellcount * cellsize)) / 2;
             //clientconnection = cli;
 
         }
@@ -65,8 +70,10 @@ namespace VenusChallengeGUI
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1200;
-            graphics.PreferredBackBufferHeight = 675;
+
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Venus Challenge - Tank Game";
@@ -92,11 +99,11 @@ namespace VenusChallengeGUI
             lifepackTexture = Content.Load<Texture2D>("lifepack");
             coinTexture = Content.Load<Texture2D>("coin");
             gamegrid.mytank.angle = 0;
-            screenWidth = device.PresentationParameters.BackBufferWidth;
-            screenHeight = device.PresentationParameters.BackBufferHeight;
-            SetUpGrid();
+            //screenWidth = device.PresentationParameters.BackBufferWidth;
+            //screenHeight = device.PresentationParameters.BackBufferHeight;
+            //SetUpGrid();
 
-            
+
         }
 
         /// <summary>
@@ -115,13 +122,15 @@ namespace VenusChallengeGUI
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (upcount == 60)
+            if (upcount == 30)
             {
                 upcount = 0;
                 // Allows the game to exit
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     this.Exit();
 
+                //ProcessKey();
+                
                 base.Update(gameTime);
 
             }
@@ -150,12 +159,7 @@ namespace VenusChallengeGUI
 
         private void DrawTank()
         {
-
-            gamegrid.mytank.pos = new Vector2(330, 66);
-
-            Vector2 rotationPoint = new Vector2(30, 30);
-            spriteBatch.Draw(tankTexture, gamegrid.mytank.pos, null, Color.White, gamegrid.mytank.angle, rotationPoint, 1, SpriteEffects.None, 1);
-
+            //spriteBatch.Draw(tankTexture, gamegrid.mytank.pos, null, Color.White, gamegrid.mytank.angle, gamegrid.mytank.rotationPoint, 1, SpriteEffects.None, 1);
         }
 
 
@@ -165,67 +169,43 @@ namespace VenusChallengeGUI
             spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
             spriteBatch.Draw(foregroundTexture, screenRectangle, Color.White);
         }
+       
+
         private void DrawCells()
         {
-            foreach (CellData cell in grid)
+            Texture2D tex = cellTexture;
+            for (int i = 0; i < gamegrid.size; i++)
             {
-                if (cell.type == "brick")
+                for (int j = 0; j < gamegrid.size; j++)
                 {
-                    spriteBatch.Draw(brickTexture, cell.position, Color.White);
-                }
-                else if (cell.type == "stone")
-                {
-                    spriteBatch.Draw(stoneTexture, cell.position, Color.White);
-                }
-                else if (cell.type == "water")
-                {
-                    spriteBatch.Draw(waterTexture, cell.position, Color.White);
-                }
-                else
-                {
-                    spriteBatch.Draw(cellTexture, cell.position, Color.White);
+                    GameEntity m = gamegrid.gameGrid[i, j];
+                    Vector2 mpos = new Microsoft.Xna.Framework.Vector2(leftBoundary + i * cellsize, topBoundary + j * cellsize);
+                    //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiii" + m.ToString());
+                    switch (m.ToString())
+                    {
+                        case "BB":
+                            tex = brickTexture;
+                            break;
+                        case "SS":
+                            tex = stoneTexture;
+                            break;
+                        case "WW":
+                            tex = waterTexture;
+                            break;
+                        case "CC":
+                            tex = coinTexture;
+                            break;
+                        case "LP":
+                            tex = lifepackTexture;
+                            break;
+                        //default:
+                        //    tex = lifepackTexture;
+                        //    break;
+                    }
+                    spriteBatch.Draw(tex, mpos, Color.White);
                 }
             }
-        }
 
-        private void SetUpGrid()
-        {
-            grid = new CellData[10, 10];
-            int[] brickvals = { 2, 3, 45, 55, 56, 80 };
-            int[] stonevals = { 12, 13, 35, 53, 89, 93 };
-            int[] watervals = { 22, 31, 40, 75, 76, 83 };
-            int bc = 0;
-            int wc = 0;
-            int sc = 0;
-            int top = 36;
-            int left = 300;
-            for (int i = 0; i < 10; i++)
-            {
-                for (int j = 0; j < 10; j++)
-                {
-                    grid[i, j].health = 100;
-                    grid[i, j].position = new Vector2(left + i * 60, top + j * 60);
-                    if (bc < 6 && brickvals[bc] == (i * 10 + j))
-                    {
-                        grid[i, j].type = "brick";
-                        bc++;
-                    }
-                    else if (sc < 6 && stonevals[sc] == (i * 10 + j))
-                    {
-                        grid[i, j].type = "stone";
-                        sc++;
-                    }
-                    else if (wc < 6 && watervals[wc] == (i * 10 + j))
-                    {
-                        grid[i, j].type = "water";
-                        wc++;
-                    }
-                    else
-                    {
-                        grid[i, j].type = "cell";
-                    }
-                }
-            }
         }
 
         public void Communicate(string msg)
@@ -241,6 +221,14 @@ namespace VenusChallengeGUI
                 default:
                     break;
             }
+        }
+        public void ProcessKey()
+        {
+            KeyboardState keybState = Keyboard.GetState();
+            if (keybState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left))
+                gamegrid.mytank.move("LEFT#");
+            if (keybState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right))
+                gamegrid.mytank.move("RIGHT#");
         }
     }
 }

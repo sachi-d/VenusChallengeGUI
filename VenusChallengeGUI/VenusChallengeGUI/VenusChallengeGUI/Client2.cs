@@ -28,12 +28,15 @@ namespace VenusChallengeGUI
         Thread receive_thread;
 
         Game1 game;
-        public Client2(Game1 g)
+        public Client2()
         {
             InitializeComponent();
+            
+        }
+        public void SetGame(Game1 g)
+        {
             game = g;
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             SendData("JOIN#");
@@ -89,7 +92,8 @@ namespace VenusChallengeGUI
                         try
                         {
                             string ss = reply.Substring(0, reply.IndexOf(";"));
-                            port = Convert.ToInt32(ss);
+                            //Console.WriteLine(ss+" dsdsdsdsdsds");
+                            //port = Convert.ToInt32(ss);
                         }
                         catch (Exception)
                         {
@@ -188,6 +192,7 @@ namespace VenusChallengeGUI
             if (!x.Equals("null"))
             {
                 SendData(x);
+                Console.WriteLine("zzzzzzzzzzzzzzzz---- " + game);
                 game.Communicate(x);
                 return true;
             }

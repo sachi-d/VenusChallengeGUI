@@ -13,11 +13,13 @@ namespace VenusChallengeGUI
         Game1 game;
         public Init()
         {
+            //game = new Game1();
             Thread gui = new Thread(new ThreadStart(StartGUI));
             gui.Start();
             Thread form = new Thread(new ThreadStart(StartForm));
             form.Start();
-            
+            Thread.Sleep(1000);
+            cli.SetGame(game);
         }
        
         private void StartGUI()
@@ -33,7 +35,7 @@ namespace VenusChallengeGUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            cli = new Client2(game);
+            cli = new Client2();
             Application.Run(cli);
         }
     }

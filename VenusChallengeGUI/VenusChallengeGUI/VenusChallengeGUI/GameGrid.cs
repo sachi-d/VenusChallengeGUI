@@ -9,7 +9,6 @@ namespace VenusChallengeGUI
     {
         public Tank mytank;
         public GameEntity[,] gameGrid;
-        int brickCount = 0;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
         List<string> stones = new List<string>();
@@ -19,19 +18,40 @@ namespace VenusChallengeGUI
         int x;
         int y;
 
+        public int size = 10;
+
+        //private int cellDistance;
+        //private int upperBound;
+        //private int leftBound;
+
         Game1 game;
 
 
         public GameGrid(Game1 g)
         {
-            gameGrid = new GameEntity[10, 10];
-            mytank = new Tank();
+            game = g;
+            gameGrid = new GameEntity[size, size];
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    gameGrid[i, j] = new GameEntity();
+                }
+            }
+                mytank = new Tank();
             mytank.setGrid(this);
             x = 0;
             y = 0;
 
 
         }
+        //public int getCellDistance(){  return cellDistance; }
+        //public int getUpperBound() { return upperBound; }
+        //public int getLeftBound() { return leftBound; }
+        //public void setCellDistance(int v) { cellDistance = v; }
+        //public void setUpperBound(int v) { upperBound = v; }
+        //public void setLeftBound(int v) { leftBound = v; }
+        
         public void setTank(int x, int y)
         {
             gameGrid[x, y] = mytank;
@@ -110,7 +130,6 @@ namespace VenusChallengeGUI
 
                 if (i == Int32.Parse(mytank.playerName))
                 {
-
                     mytank.globalUpdate(c[i + 1]);
                     Console.WriteLine(c[i + 1]);
 
@@ -124,7 +143,6 @@ namespace VenusChallengeGUI
 
                         mytank.prevX = x;
                         mytank.prevY = y;
-
                         this.gameGrid[p, q] = null;
                     }
                     string[] cl = c[i + 1].Split(';');
@@ -144,10 +162,6 @@ namespace VenusChallengeGUI
                     x = Int32.Parse(cl[1].ElementAt(2).ToString());
                     tankList.Last().globalUpdate(c[i + 1]);
                     this.gameGrid[x, y] = tankList.Last();
-
-
-
-
 
                 }
 

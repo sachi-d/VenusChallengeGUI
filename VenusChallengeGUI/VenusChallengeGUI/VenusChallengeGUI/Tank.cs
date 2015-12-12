@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,6 @@ namespace VenusChallengeGUI
     class Tank : GameEntity
     {
 
-        public float todirection;
         public int prevX;
         public int prevY;
         public int health;
@@ -17,6 +17,7 @@ namespace VenusChallengeGUI
         public bool whetherShot;
         public bool status;
         public float angle;
+        public Vector2 rotationPoint;
         GameGrid grid;//the game grid this tank belongs to
         String respond;
         public Tank()
@@ -25,7 +26,6 @@ namespace VenusChallengeGUI
             angle = 0;
             coins = 0;
             points = 0;
-            todirection = 0;
             whetherShot = false;
             health = 0;
             status = true;
@@ -38,7 +38,6 @@ namespace VenusChallengeGUI
 
             coins = 0;
             points = 0;
-            todirection = 0;
             whetherShot = false;
             health = 0;
             status = true;
@@ -68,7 +67,8 @@ namespace VenusChallengeGUI
             angle = Int32.Parse(message[4]);
             setPlayerName(message[1].ElementAt(1).ToString());
             grid.gameGrid[x, y] = this;
-
+            //this.pos = new Vector2(grid.leftBound+x,grid.upperBound+y);
+            //this.rotationPoint = new Vector2(grid.CellDistance / 2, grid.CellDistance / 2);
             Console.Write(grid.gameGrid[x, y].ToString() + " ");
             //   Console.ReadLine();
             //Console.WriteLine("x: {0}", x);
@@ -95,27 +95,34 @@ namespace VenusChallengeGUI
 
         public void move(string command)
         { // get the command and check the irection of the tank facing
-            
+            float todirection = 0;
+            float tox = this.pos.X;
+            float toy = this.pos.Y;
+            int tomove = 60;
             if (command.Equals("UP#"))
             {
-                todirection = 0;
+                todirection = MathHelper.ToRadians(0);
+                toy -= tomove;
             }
             else if (command.Equals("DOWN#"))
             {
-                todirection = 2;
+                todirection = MathHelper.ToRadians(180);
+                toy += tomove;
             }
             else if (command.Equals("RIGHT#"))
             {
-                todirection = 1;
+                todirection = MathHelper.ToRadians(90);
+                tox += tomove;
             }
             else if (command.Equals("LEFT#"))
             {
-                todirection = 3;
+                todirection = MathHelper.ToRadians(270);
+                tox -= tomove;
             }
 
             if (todirection == angle)
             {
-                //move forward
+                this.pos = new Vector2(tox, toy);
             }
             else
             {

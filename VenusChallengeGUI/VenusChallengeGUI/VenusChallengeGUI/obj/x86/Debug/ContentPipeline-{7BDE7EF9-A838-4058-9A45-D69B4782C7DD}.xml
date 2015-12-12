@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\lifepack.xnb</Output>
-      <Time>2015-12-08T11:23:01.6642826+05:30</Time>
+      <Time>2015-12-08T17:12:34.4118098+05:30</Time>
     </Item>
     <Item>
       <Source>coin.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
-      <Time>2015-12-08T11:27:56.4400132+05:30</Time>
+      <Time>2015-12-08T17:12:34.424818+05:30</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
