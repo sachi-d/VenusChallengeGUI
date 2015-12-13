@@ -38,7 +38,7 @@ namespace VenusChallengeGUI
                     gameGrid[i, j] = new GameEntity();
                 }
             }
-                mytank = new MyTank();
+            mytank = new MyTank();
             mytank.setGrid(this);
             x = 0;
             y = 0;
@@ -51,7 +51,7 @@ namespace VenusChallengeGUI
         //public void setCellDistance(int v) { cellDistance = v; }
         //public void setUpperBound(int v) { upperBound = v; }
         //public void setLeftBound(int v) { leftBound = v; }
-        
+
         public void setTank(int x, int y)
         {
             gameGrid[x, y] = mytank;
@@ -254,8 +254,23 @@ namespace VenusChallengeGUI
                 s = "life packs!";
                 getLifePacksDetails(message);
             }
-            //this.displayGrid();
+            this.displayGrid();
 
+        }
+
+        public void updateLocalMoves(string msg)
+        {
+            switch (msg)
+            {
+                case "UP#":
+                case "DOWN#":
+                case "LEFT#":
+                case "RIGHT#":
+                    mytank.move(msg);
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
