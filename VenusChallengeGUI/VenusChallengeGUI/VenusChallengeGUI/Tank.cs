@@ -17,7 +17,8 @@ namespace VenusChallengeGUI
         public bool whetherShot;
         public bool status;
         public float angle;
-        public Vector2 rotationPoint=new Vector2(30,30);
+        public int direction;
+        public Vector2 rotationPoint = new Vector2(30, 30);
         GameGrid grid;//the game grid this tank belongs to
         String respond;
         public Tank()
@@ -53,6 +54,25 @@ namespace VenusChallengeGUI
         {
             playerName = l;
         }
+        public void setDirection(int dir)
+        {
+            switch (dir)
+            {
+                case 0:
+                    angle = MathHelper.ToRadians(0);
+                    break;
+                case 1:
+                    angle = MathHelper.ToRadians(90);
+                    break;
+                case 2:
+                    angle = MathHelper.ToRadians(180);
+                    break;
+                case 3:
+                    angle = MathHelper.ToRadians(270);
+                    break;
+            }
+            direction = dir;
+        }
 
         public void setLocation(String l) // Go to the initial setup location.
         {
@@ -62,9 +82,9 @@ namespace VenusChallengeGUI
             message = l.Split(':', ';', ',');
             x = Int32.Parse(message[2]);
             y = Int32.Parse(message[3]);
-            angle = Int32.Parse(message[4]);
+            direction = Int32.Parse(message[4]);
             setPlayerName(message[1].ElementAt(1).ToString());
-            grid.gameGrid[x, y] = this;
+            setGridLocation(x, y, 4);
             //this.pos = new Vector2(grid.leftBound+x,grid.upperBound+y);
             //this.rotationPoint = new Vector2(grid.CellDistance / 2, grid.CellDistance / 2);
             Console.Write(grid.gameGrid[x, y].ToString() + " ");
@@ -72,14 +92,39 @@ namespace VenusChallengeGUI
             //Console.WriteLine("x: {0}", x);
             //Console.WriteLine("y: {0}", y);
             Console.WriteLine("HELLOOO");
+        }
 
+        private void setGridLocation(int newx, int newy, int direction)
+        {
+            int prex = newx;
+            int prey = newy;
+            switch (direction)   //change the cell the tank was previously residing to a normal cell 0123=NESW
+            {
+                case 0:
+                    prey = newy + 1;
+                    break;
+                case 1:
+                    prex = newx - 1;
+                    break;
+                case 2:
+                    prey = newy - 1;
+                    break;
+                case 3:
+                    prex = newx + 1;
+                    break;
+            }
+            grid.gameGrid[newx, newy] = this;
+            grid.gameGrid[prex, prey] = new GameEntity();   //celltexture
+            pos = new Vector2(newx, newy);
+            x = newx;
+            y = newy;
         }
         public void globalUpdate(String updatedValues)
         {
             Console.WriteLine("glovbal method updating");
             string[] c = updatedValues.Split(';');
 
-            angle = Int32.Parse(c[2]);
+            direction = Int32.Parse(c[2]);
             Console.WriteLine("updated direction");
             if (Int32.Parse(c[3]) != 0)
             {
@@ -91,69 +136,61 @@ namespace VenusChallengeGUI
             Console.WriteLine("name- -" + playerName + "health- -" + health + "coins- -" + coins + "points - " + points + "");
         }
 
+
+
         public void move(string command)
         { // get the command and check the irection of the tank facing
-            float todirection = 0;
-            float tox = this.pos.X;
-            float toy = this.pos.Y;
-            int tomove = 60;
+            int todirection = 0;
+            int tox = x;
+            int toy = y;
+
             if (command.Equals("UP#"))
             {
-                todirection = MathHelper.ToRadians(0);
-                toy -= tomove;
+                todirection = 0;
+                toy -= 1;
             }
             else if (command.Equals("DOWN#"))
             {
-                todirection = MathHelper.ToRadians(180);
-                toy += tomove;
+                todirection = 2;
+                toy += 1;
             }
             else if (command.Equals("RIGHT#"))
             {
-                todirection = MathHelper.ToRadians(90);
-                tox += tomove;
+                todirection = 1;
+                tox += 1;
             }
             else if (command.Equals("LEFT#"))
             {
-                todirection = MathHelper.ToRadians(270);
-                tox -= tomove;
+                todirection = 3;
+                tox -= 1;
             }
 
-            if (todirection == angle)
+            
+            if (todirection == direction)
             {
-                this.pos = new Vector2(tox, toy);
+                //check if inside the grid
+                if (tox < 0 || toy < 0 || tox > 9 || toy > 9)
+                {
+                    Console.WriteLine("Going out of the grid");
+                }
+                else
+                {
+                    if (grid.gameGrid[tox, toy].ToString().Equals("CC"))
+                    {
+                        this.coins++;
+                    }
+                    if (grid.gameGrid[tox, toy].ToString().Equals("LP"))
+                    {
+                        this.health++;
+                    }
+                    setGridLocation(tox, toy, direction);
+                }
             }
             else
             {
-                angle = todirection;
+                setDirection(todirection);
             }
-            //rotate(dir);
-            //if (grid.gameGrid[nextX, nextY].ToString() == "")
-            //{
-            //    x = nextX;
-            //    y = nextY;
-            //}
-
         }
-
-        //public void rotate(int dir)
-        //{ // get the direction of the next command.
-        //    if (dir == 0)
-        //    {
-        //        nextY = y + 1;
-        //    }
-        //    else if (dir == 1)
-        //    {
-        //        nextX = x + 1;
-        //    }
-        //    else if (dir == 2)
-        //    {
-        //        nextY = y - 1;
-        //    }
-        //    else if (dir == 3)
-        //    {
-        //        nextX = x - 1;
-        //    }
-        //}
         public String respondCommands(String x)
         {
             x = x.Split('#')[0];
@@ -222,7 +259,7 @@ namespace VenusChallengeGUI
 
         public override string ToString()
         {
-            return "P"+playerName;
+            return "P" + playerName;
         }
 
     }
@@ -235,10 +272,10 @@ namespace VenusChallengeGUI
 
         }
 
-        //public override string ToString()
-        //{
-        //    return "MYTANK";
-        //}
+        public override string ToString()
+        {
+            return "MYTANK";
+        }
 
     }
 

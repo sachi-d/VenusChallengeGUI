@@ -40,6 +40,9 @@ namespace VenusChallengeGUI
         Texture2D op3Texture;
         Texture2D op4Texture;
 
+        UI.ProgressBar coinBar;
+        UI.ProgressBar healthBar;
+
         int screenWidth = 1200; //FIXED BACKGROUND WIDTH
         int screenHeight = 675;   //FIXED BACKGROUNDHEIGHT
         int cellsize = 60;      //FIXED CELL WIDTH
@@ -106,7 +109,8 @@ namespace VenusChallengeGUI
             op2Texture = Content.Load<Texture2D>("op2");
             op3Texture = Content.Load<Texture2D>("op3");
             op4Texture = Content.Load<Texture2D>("op4");
-            gamegrid.mytank.angle = 0;
+            coinBar = new UI.ProgressBar(this, new Rectangle(10, 10, 300, 16));
+            //gamegrid.mytank.angle = 0;
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
             //SetUpGrid();
@@ -137,7 +141,10 @@ namespace VenusChallengeGUI
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     this.Exit();
 
-                //ProcessKey();
+                coinBar.value = gamegrid.mytank.coins;
+                coinBar.Update(gameTime);
+                healthBar.value = gamegrid.mytank.health;
+                healthBar.Update(gameTime);
                 
                 base.Update(gameTime);
 
@@ -158,8 +165,7 @@ namespace VenusChallengeGUI
             spriteBatch.Begin();
             DrawScenery();
             DrawCells();
-            //DrawTank();
-
+            DrawBars();
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -167,7 +173,8 @@ namespace VenusChallengeGUI
 
         private void DrawTank(Tank t,Texture2D tex)
         {
-            spriteBatch.Draw(tex, t.pos, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 1);
+            Vector2 position = new Vector2(t.x*cellsize + leftBoundary+cellsize/2, t.y*cellsize + topBoundary+cellsize/2);
+            spriteBatch.Draw(tex, position, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 1);
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -177,8 +184,12 @@ namespace VenusChallengeGUI
             spriteBatch.Draw(backgroundTexture, screenRectangle, Color.White);
             spriteBatch.Draw(foregroundTexture, screenRectangle, Color.White);
         }
-       
 
+        private void DrawBars()
+        {
+            coinBar.Draw(spriteBatch);
+            healthBar.Draw(spriteBatch);
+        }
         private void DrawCells()
         {
             Texture2D tex = cellTexture;
@@ -209,6 +220,9 @@ namespace VenusChallengeGUI
                         case "MYTANK":
                             tex=tankTexture;
                             break;
+                        case "P1":
+                            tex = op1Texture;
+                            break;
 
                         default:
                             tex = cellTexture;
@@ -218,6 +232,9 @@ namespace VenusChallengeGUI
                     {
                         case "MYTANK":
                             DrawTank(gamegrid.mytank, tex);
+                            break;
+                        case "P1":
+                            //DrawTank(gamegrid, tex);
                             break;
                         default:
                             spriteBatch.Draw(tex, mpos, Color.White);
@@ -231,17 +248,7 @@ namespace VenusChallengeGUI
 
         public void Communicate(string msg)
         {
-            switch (msg)
-            {
-                case "UP#":
-                case "DOWN#":
-                case "LEFT#":
-                case "RIGHT#":
-                    gamegrid.mytank.move(msg);
-                    break;
-                default:
-                    break;
-            }
+            gamegrid.updateLocalMoves(msg);
         }
         public void ProcessKey()
         {
