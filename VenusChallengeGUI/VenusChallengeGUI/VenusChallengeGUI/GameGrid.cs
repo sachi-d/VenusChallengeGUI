@@ -9,6 +9,7 @@ namespace VenusChallengeGUI
     {
         public MyTank mytank;
         public GameEntity[,] gameGrid;
+        Node mynode;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
         List<string> stones = new List<string>();
@@ -17,6 +18,12 @@ namespace VenusChallengeGUI
 
         int x;
         int y;
+        internal List<Tank> TankList
+        {
+            get { return tankList; }
+            set { tankList = value; }
+        }
+        int u = 0;
 
         public int size = 10;
 
@@ -42,7 +49,7 @@ namespace VenusChallengeGUI
             mytank.setGrid(this);
             x = 0;
             y = 0;
-
+            mynode = new Node();
 
         }
         //public int getCellDistance(){  return cellDistance; }
@@ -51,7 +58,12 @@ namespace VenusChallengeGUI
         //public void setCellDistance(int v) { cellDistance = v; }
         //public void setUpperBound(int v) { upperBound = v; }
         //public void setLeftBound(int v) { leftBound = v; }
-
+        public Tank GetTank()
+        {
+            //Dog d = new Dog(this.age,this.size);
+            //return d;
+            return mytank;
+        }
         public void setTank(int x, int y)
         {
             gameGrid[x, y] = mytank;
@@ -110,10 +122,15 @@ namespace VenusChallengeGUI
                 Console.WriteLine("\n");
             }
         }
+        public void notifyGameOver()
+        {
+            mynode.getGameOverNotifications(true);
+        }
+
 
         public void setGlobalUpdate(string updatedValues) // once per second server will broadcast all the details about what happend in the gamegrid.
         {
-
+            int u, l;
             updatedValues = updatedValues.Remove(updatedValues.Length - 2);
             string[] c = updatedValues.Split(':');
             Console.Write(updatedValues);
@@ -121,7 +138,8 @@ namespace VenusChallengeGUI
             int q = mytank.prevY;
             Console.WriteLine("p" + p);
             Console.WriteLine("p" + q);
-
+            bool exist = false;
+            int tankIndex = -1;
             // updateDamages(c[c.Length - 1]);
             IDictionary<string, Tank> col = new Dictionary<string, Tank>();
             for (int i = 0; i < c.Length - 2; i++)
@@ -130,11 +148,12 @@ namespace VenusChallengeGUI
 
                 if (i == Int32.Parse(mytank.playerName))
                 {
+
                     mytank.globalUpdate(c[i + 1]);
                     Console.WriteLine(c[i + 1]);
 
 
-                    if ((p == x && q == y))        //|| (x == null)
+                    if ((p == x && q == y) || (x == null))
                     {
 
                     }
@@ -143,6 +162,7 @@ namespace VenusChallengeGUI
 
                         mytank.prevX = x;
                         mytank.prevY = y;
+
                         this.gameGrid[p, q] = null;
                     }
                     string[] cl = c[i + 1].Split(';');
@@ -155,13 +175,42 @@ namespace VenusChallengeGUI
                 {
 
                     string[] cl = c[i + 1].Split(';');
+                    for (int pn = 0; pn < tankList.Count; pn++)
+                    {
+                        if (tankList[pn].playerName.Equals(cl[0].ElementAt(1).ToString() + cl[0].ElementAt(1).ToString()))
+                        {
+                            Console.WriteLine("Tankindex = " + pn + " " + tankList[pn].playerName);
+                            exist = true;
+                            tankIndex = pn;
+                            break;
+                        }
+                    }
 
-                    tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
+                    l = Int32.Parse(cl[1].ElementAt(0).ToString());
+                    u = Int32.Parse(cl[1].ElementAt(2).ToString());
+                    if (!exist)
+                    {
+                        tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
+                        tankList.Last().globalUpdate(c[i + 1]);
+                        this.gameGrid[u, l] = tankList.Last();
 
-                    y = Int32.Parse(cl[1].ElementAt(0).ToString());
-                    x = Int32.Parse(cl[1].ElementAt(2).ToString());
-                    tankList.Last().globalUpdate(c[i + 1]);
-                    this.gameGrid[x, y] = tankList.Last();
+                    }
+                    else
+                    {
+                        tankList[tankIndex].globalUpdate(c[i + 1]);
+
+                        if ((tankList[tankIndex].prevX == u && tankList[tankIndex].prevY == l) || (u == null))
+                        { }
+                        else
+                        {
+                            this.gameGrid[tankList[tankIndex].prevX, tankList[tankIndex].prevY] = null;
+                            tankList[tankIndex].prevX = u;
+                            tankList[tankIndex].prevY = l;
+                        }
+                        this.gameGrid[u, l] = tankList[tankIndex];
+                    }
+
+
 
                 }
 
