@@ -11,7 +11,7 @@ namespace VenusChallengeGUI
     {
         bool MaxPlayer = true;
         public bool gameOver = false;
-        Client c;
+        Client2 c;
         private Timer _pingTimer;
         GameGrid grid;
         Tank t;
