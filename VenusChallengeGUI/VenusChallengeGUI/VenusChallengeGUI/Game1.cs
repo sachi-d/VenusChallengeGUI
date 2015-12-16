@@ -40,9 +40,6 @@ namespace VenusChallengeGUI
         Texture2D op3Texture;
         Texture2D op4Texture;
 
-        UI.ProgressBar coinBar;
-        UI.ProgressBar healthBar;
-
         int screenWidth = 1200; //FIXED BACKGROUND WIDTH
         int screenHeight = 675;   //FIXED BACKGROUNDHEIGHT
         int cellsize = 60;      //FIXED CELL WIDTH
@@ -109,7 +106,6 @@ namespace VenusChallengeGUI
             op2Texture = Content.Load<Texture2D>("op2");
             op3Texture = Content.Load<Texture2D>("op3");
             op4Texture = Content.Load<Texture2D>("op4");
-            coinBar = new UI.ProgressBar(this, new Rectangle(10, 10, 300, 16));
             //gamegrid.mytank.angle = 0;
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
@@ -141,10 +137,6 @@ namespace VenusChallengeGUI
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     this.Exit();
 
-                coinBar.value = gamegrid.mytank.coins;
-                coinBar.Update(gameTime);
-                healthBar.value = gamegrid.mytank.health;
-                healthBar.Update(gameTime);
                 
                 base.Update(gameTime);
 
@@ -187,8 +179,7 @@ namespace VenusChallengeGUI
 
         private void DrawBars()
         {
-            coinBar.Draw(spriteBatch);
-            healthBar.Draw(spriteBatch);
+            //drAW health n coins display
         }
         private void DrawCells()
         {
