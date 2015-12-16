@@ -65,63 +65,15 @@ namespace VenusChallengeGUI
         }
         public void TrialRun(Object sender, ElapsedEventArgs eventArgs)
         {
-            int tox = tank.x;
-            int toy = tank.y;
-            int todirection = tank.direction;
-
-            while (true)
+            if (grid.GetGrid()[tank.x+1, tank.y].ToString().Equals("CELL"))
             {
-                string c = "";
-                while (true)
+                if (tank.direction == 1)
                 {
-                    c = "";
-                    if (todirection == 0)
-                    { //check up
-                        tox = tank.x;
-                        toy -= tank.y;
-                        c = "UP#";
-                        break;
-                    }
-                    else if (todirection == 1)
-                    {
-                        tox += tank.x;
-                        toy = tank.y;
-                        c = "RIGHT#";
-                        break;
-                    }
-                    else if (todirection == 2)
-                    {
-                        tox = tank.x;
-                        toy += tank.y;
-                        c = "DOWN#";
-                        break;
-                    }
-                    else if (todirection == 3)
-                    {
-                        tox -= tank.x;
-                        toy = tank.y;
-                        c = "LEFT#";
-                        break;
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-                if (grid.GetGrid()[tox, toy].ToString().Equals("CELL"))
-                {
-                    tank.setGridLocation(tox, toy, todirection);
-                    client.SendData(c);
-                    break;
-                }
-                else
-                {
-                    Random rnd = new Random();
-                    int n = rnd.Next(0, 4);
-                    tank.setDirection(n);
+                    tank.move("LEFT#");
+                    client.SendData("LEFT#");
                 }
             }
+
 
         }
 
