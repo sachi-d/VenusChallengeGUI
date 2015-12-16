@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\background.xnb</Output>
-      <Time>2015-12-13T12:58:26.6460991+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\background.xnb</Output>
+      <Time>2015-12-07T22:14:57.6765891+05:30</Time>
     </Item>
     <Item>
       <Source>brick.jpg</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick.xnb</Output>
-      <Time>2015-12-13T12:58:26.6611095+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick.xnb</Output>
+      <Time>2015-12-07T22:14:57.6765891+05:30</Time>
     </Item>
     <Item>
       <Source>cell.jpg</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\cell.xnb</Output>
-      <Time>2015-12-13T12:58:26.6631096+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\cell.xnb</Output>
+      <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
     <Item>
       <Source>foreground.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\foreground.xnb</Output>
-      <Time>2015-12-13T12:58:26.6781298+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\foreground.xnb</Output>
+      <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
     <Item>
       <Source>stone.jpg</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\stone.xnb</Output>
-      <Time>2015-12-13T12:58:26.7111383+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\stone.xnb</Output>
+      <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
     <Item>
       <Source>tank.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\tank.xnb</Output>
-      <Time>2015-12-13T12:58:26.7141407+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\tank.xnb</Output>
+      <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
     <Item>
       <Source>water.jpg</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\water.xnb</Output>
-      <Time>2015-12-13T12:58:26.7171426+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\water.xnb</Output>
+      <Time>2015-12-07T22:14:57.6922153+05:30</Time>
     </Item>
     <Item>
       <Source>lifepack.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\lifepack.xnb</Output>
-      <Time>2015-12-13T12:58:26.6801237+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\lifepack.xnb</Output>
+      <Time>2015-12-08T17:12:34.4118098+05:30</Time>
     </Item>
     <Item>
       <Source>coin.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
-      <Time>2015-12-13T12:58:26.666111+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
+      <Time>2015-12-08T17:12:34.424818+05:30</Time>
     </Item>
     <Item>
       <Source>op0.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op0.xnb</Output>
-      <Time>2015-12-16T11:19:27.3205431+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op0.xnb</Output>
+      <Time>2015-12-12T23:33:59.0976295+05:30</Time>
     </Item>
     <Item>
       <Source>op1.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op1.xnb</Output>
-      <Time>2015-12-16T07:50:21.860401+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op1.xnb</Output>
+      <Time>2015-12-12T23:33:59.0976295+05:30</Time>
     </Item>
     <Item>
       <Source>op2.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op2.xnb</Output>
-      <Time>2015-12-16T07:50:21.8624074+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op2.xnb</Output>
+      <Time>2015-12-12T23:33:51.2367848+05:30</Time>
     </Item>
     <Item>
       <Source>op3.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op3.xnb</Output>
-      <Time>2015-12-16T07:50:21.8644043+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op3.xnb</Output>
+      <Time>2015-12-12T23:33:40.4583553+05:30</Time>
     </Item>
     <Item>
       <Source>op4.png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op4.xnb</Output>
-      <Time>2015-12-16T07:50:21.8674058+05:30</Time>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op4.xnb</Output>
+      <Time>2015-12-12T23:33:21.138601+05:30</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -134,10 +134,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUIContent\</RootDirectory>
-      <LoggerRootDirectory>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUIContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -166,7 +166,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2015-11-13T02:59:43.808004+05:30</Value>
+        <Value>2015-11-12T04:53:31.6888859+05:30</Value>
       </Assembly>
     </Assemblies>
   </Asset>

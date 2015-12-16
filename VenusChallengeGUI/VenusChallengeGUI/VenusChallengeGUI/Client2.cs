@@ -29,11 +29,12 @@ namespace VenusChallengeGUI
 
         Game1 game;
         AI aiNew;
+        bool isAIMode;
         public Client2()
         {
             InitializeComponent();
-            
-            
+            isAIMode = false;
+
         }
         public void SetGame(Game1 g)
         {
@@ -44,7 +45,11 @@ namespace VenusChallengeGUI
             SendData("JOIN#");
             startRecieve();
             button1.Enabled = false;
-            aiNew = new AI(game);
+            if (isAIMode)
+            {
+                aiNew = new AI(game,this);
+                checkBox1.Enabled = false;
+            }
         }
 
 
@@ -201,9 +206,21 @@ namespace VenusChallengeGUI
                 //game.Communicate(x);
                 return true;
             }
-                return base.ProcessCmdKey(ref msg, keyData);
-            
-            
+            return base.ProcessCmdKey(ref msg, keyData);
+
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isAIMode)
+            {
+                isAIMode = false;
+            }
+            else
+            {
+                isAIMode = true;
+            }
         }
 
     }

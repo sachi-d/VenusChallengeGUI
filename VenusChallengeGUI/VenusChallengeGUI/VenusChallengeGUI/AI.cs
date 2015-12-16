@@ -11,24 +11,31 @@ namespace VenusChallengeGUI
     {
         bool MaxPlayer = true;
         public bool gameOver = false;
-        Client2 c;
+        Client2 client;
         private Timer _pingTimer;
         GameGrid grid;
         int count;
         int score;
-        Tank t;
+        Tank tank;
         GameEntity cell;
         List<GameEntity> children;
         List<GameEntity> tankList;
         List<GameEntity> emptyCells;
 
-        public AI(Game1 g)
+        public AI(Game1 g,Client2 cli)
         {
 
             this._pingTimer = new Timer();
             this._pingTimer.Interval = 1000;
-            this._pingTimer.Elapsed += new ElapsedEventHandler(this.TimeElapsed);
+            //this._pingTimer.Elapsed += new ElapsedEventHandler(this.TimeElapsed);
+
+            //trial run
+            this._pingTimer.Elapsed += new ElapsedEventHandler(this.TrialRun);
+
+
             this._pingTimer.Enabled = true;
+
+            this.client = cli;
             setGrid(g.Gamegrid);
             setTank();
             count = 0;
@@ -53,15 +60,78 @@ namespace VenusChallengeGUI
 
         public void setTank()
         {
-            t = grid.mytank;
+            tank = grid.mytank;
 
         }
+        public void TrialRun(Object sender, ElapsedEventArgs eventArgs)
+        {
+            int tox = tank.x;
+            int toy = tank.y;
+            int todirection = tank.direction;
+
+            while (true)
+            {
+                string c = "";
+                while (true)
+                {
+                    c = "";
+                    if (todirection == 0)
+                    { //check up
+                        tox = tank.x;
+                        toy -= tank.y;
+                        c = "UP#";
+                        break;
+                    }
+                    else if (todirection == 1)
+                    {
+                        tox += tank.x;
+                        toy = tank.y;
+                        c = "RIGHT#";
+                        break;
+                    }
+                    else if (todirection == 2)
+                    {
+                        tox = tank.x;
+                        toy += tank.y;
+                        c = "DOWN#";
+                        break;
+                    }
+                    else if (todirection == 3)
+                    {
+                        tox -= tank.x;
+                        toy = tank.y;
+                        c = "LEFT#";
+                        break;
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+                if (grid.GetGrid()[tox, toy].ToString().Equals("CELL"))
+                {
+                    tank.setGridLocation(tox, toy, todirection);
+                    client.SendData(c);
+                    break;
+                }
+                else
+                {
+                    Random rnd = new Random();
+                    int n = rnd.Next(0, 4);
+                    tank.setDirection(n);
+                }
+            }
+
+        }
+
+        
 
         public void TimeElapsed(Object sender, ElapsedEventArgs eventArgs)
         {
             GetBestScore();
-            grid.gameGrid[t.x,t.y] = new GameEntity();
-            grid.gameGrid[cell.x, cell.y] = t;
+            grid.GetGrid()[tank.x, tank.y] = new GameEntity();
+            grid.GetGrid()[cell.x, cell.y] = tank;
 
 
             //   Console.WriteLine(this.Iterate(startNode, int.MaxValue, int.MinValue, MaxPlayer)+"Final Score");
@@ -76,18 +146,18 @@ namespace VenusChallengeGUI
                 for (int j = 0; j < 10; j++)
                 {
 
-                    if ((grid.gameGrid[i, j].ToString().Equals("CELL")) || (grid.gameGrid[i, j].ToString().Equals("LP")) || (grid.gameGrid[i, j].ToString().Equals("CC")))
+                    if ((grid.GetGrid()[i, j].ToString().Equals("CELL")) || (grid.GetGrid()[i, j].ToString().Equals("LP")) || (grid.GetGrid()[i, j].ToString().Equals("CC")))
                     {
                         if ((grid.mytank.x + 1 >= i || grid.mytank.x - 1 <= i) && (grid.mytank.y + 1 >= i || grid.mytank.y - 1 <= i))
                         {
 
-                            children.Add(grid.gameGrid[i, j]);
+                            children.Add(grid.GetGrid()[i, j]);
                         }
-                        emptyCells.Add(grid.gameGrid[i, j]);
+                        emptyCells.Add(grid.GetGrid()[i, j]);
                     }
-                    if (grid.gameGrid[i, j].ToString().Substring(0, 2).Equals("PP"))
+                    if (grid.GetGrid()[i, j].ToString().Substring(0, 2).Equals("PP"))
                     {
-                        tankList.Add(grid.gameGrid[i, j]);
+                        tankList.Add(grid.GetGrid()[i, j]);
                     }
                 }
                 // Console.WriteLine("\n");
@@ -116,7 +186,7 @@ namespace VenusChallengeGUI
                 }
             }
             score = bestScore;
-           
+
         }
         public int evaluateScore(GameEntity node)
         {
@@ -128,9 +198,10 @@ namespace VenusChallengeGUI
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if ((node.x != i && node.y != j) || (node.x != t.x && node.y != t.y))
+                    if ((node.x != i && node.y != j) || (node.x != tank.x && node.y != tank.y))
                     {
-                        foreach(GameEntity c in tankList){
+                        foreach (GameEntity c in tankList)
+                        {
                             if (i == c.x || j == c.y)
                             {
                                 break;
@@ -139,30 +210,30 @@ namespace VenusChallengeGUI
 
 
                         }
-                        if (emptyCells.Contains(grid.gameGrid[i, j]))
+                        if (emptyCells.Contains(grid.GetGrid()[i, j]))
                         {
 
                             if ((i <= node.x + 1 && i >= node.x - 1) || (j <= node.y + 1 && j >= node.y - 1))
                             {
-                                if (emptyCells.Contains(grid.gameGrid[i, j]))
-                                    if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (emptyCells.Contains(grid.GetGrid()[i, j]))
+                                    if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                     {
 
                                         score += -1000;
 
                                     }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 600;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 580;
                                 }
                             }
                             else if ((i <= node.x + 2 && i >= node.x - 2) || (j <= node.y + 2 && j >= node.y - 2))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -170,18 +241,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 570;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 550;
                                 }
                             }
                             else if ((i <= node.x + 3 && i >= node.x - 3) || (j <= node.y + 3 && j >= node.y - 3))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -189,18 +260,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 540;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 520;
                                 }
                             }
                             else if ((i <= node.x + 4 && i >= node.x - 4) || (j <= node.y + 4 && j >= node.y - 4))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -208,11 +279,11 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 510;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 490;
                                 }
@@ -220,7 +291,7 @@ namespace VenusChallengeGUI
 
                             else if ((i <= node.x + 5 && i >= node.x - 5) || (j <= node.y + 5 && j >= node.y - 5))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -228,18 +299,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 480;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 460;
                                 }
                             }
                             else if ((i <= node.x + 6 && i >= node.x - 6) || (j <= node.y + 6 && j >= node.y - 6))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -247,18 +318,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 450;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 430;
                                 }
                             }
                             else if ((i <= node.x + 7 && i >= node.x - 7) || (j <= node.y + 7 && j >= node.y - 7))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -266,18 +337,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 410;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 390;
                                 }
                             }
                             else if ((i <= node.x + 8 && i >= node.x - 8) || (j <= node.y + 8 && j >= node.y - 8))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -285,18 +356,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 380;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 360;
                                 }
                             }
                             else if ((i <= node.x + 9 && i >= node.x - 9) || (j <= node.y + 9 && j >= node.y - 9))
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -304,18 +375,18 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 340;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 320;
                                 }
                             }
                             else
                             {
-                                if (grid.gameGrid[i, j].GetType() == typeof(Tank))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Tank))
                                 {
                                     tankCount++;
                                     if (tankCount > 1)
@@ -323,11 +394,11 @@ namespace VenusChallengeGUI
                                         score += -1000;
                                     }
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(LifePack))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(LifePack))
                                 {
                                     score += 300;
                                 }
-                                if (grid.gameGrid[i, j].GetType() == typeof(Coin))
+                                if (grid.GetGrid()[i, j].GetType() == typeof(Coin))
                                 {
                                     score += 280;
                                 }
@@ -341,7 +412,7 @@ namespace VenusChallengeGUI
             return score;
 
         }
-        
+
     }
 
 

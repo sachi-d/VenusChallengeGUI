@@ -87,14 +87,14 @@ namespace VenusChallengeGUI
             setGridLocation(x, y, 4);
             //this.pos = new Vector2(grid.leftBound+x,grid.upperBound+y);
             //this.rotationPoint = new Vector2(grid.CellDistance / 2, grid.CellDistance / 2);
-            Console.Write(grid.gameGrid[x, y].ToString() + " ");
+            Console.Write(grid.GetGrid()[x, y].ToString() + " ");
             //   Console.ReadLine();
             //Console.WriteLine("x: {0}", x);
             //Console.WriteLine("y: {0}", y);
             Console.WriteLine("HELLOOO");
         }
 
-        private void setGridLocation(int newx, int newy, int direction)
+        public void setGridLocation(int newx, int newy, int direction)
         {
             int prex = newx;
             int prey = newy;
@@ -113,8 +113,8 @@ namespace VenusChallengeGUI
                     prex = newx + 1;
                     break;
             }
-            grid.gameGrid[newx, newy] = this;
-            grid.gameGrid[prex, prey] = new GameEntity();   //celltexture
+            grid.GetGrid()[newx, newy] = this;
+            grid.GetGrid()[prex, prey] = new GameEntity();   //celltexture
             pos = new Vector2(newx, newy);
             x = newx;
             y = newy;
@@ -196,7 +196,7 @@ namespace VenusChallengeGUI
                     //}
 
 
-                    switch (grid.gameGrid[tox, toy].ToString().Substring(0, 2))
+                    switch (grid.GetGrid()[tox, toy].ToString().Substring(0, 2))
                     {
                         case "BB":
                         case "SS":

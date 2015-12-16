@@ -8,7 +8,7 @@ namespace VenusChallengeGUI
     class GameGrid
     {
         public MyTank mytank;
-        public GameEntity[,] gameGrid;
+        private GameEntity[,] gameGrid;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
         List<string> stones = new List<string>();
@@ -57,6 +57,10 @@ namespace VenusChallengeGUI
         //public void setCellDistance(int v) { cellDistance = v; }
         //public void setUpperBound(int v) { upperBound = v; }
         //public void setLeftBound(int v) { leftBound = v; }
+
+        public GameEntity[,] GetGrid(){
+            return this.gameGrid;
+        }
         public Tank GetTank()
         {
             //Dog d = new Dog(this.age,this.size);

@@ -196,7 +196,7 @@ namespace VenusChallengeGUI
             {
                 for (int j = 0; j < gamegrid.size; j++)
                 {
-                    GameEntity m = gamegrid.gameGrid[i, j];
+                    GameEntity m = gamegrid.GetGrid()[i, j];
                     Vector2 mpos = new Microsoft.Xna.Framework.Vector2(leftBoundary + i * cellsize, topBoundary + j * cellsize);
                     //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiii" + m.ToString());
 
@@ -250,8 +250,8 @@ namespace VenusChallengeGUI
                     {
                         case "PP":
                             //spriteBatch.Draw(tex, mpos, Color.White);
-                            //DrawTank(gamegrid.mytank, tex);
-                            spriteBatch.Draw(tex, mpos, Color.White);
+                            DrawTank(gamegrid.mytank, tex);
+                            //spriteBatch.Draw(tex, mpos, Color.White);
                             break;
                         
                         default:
