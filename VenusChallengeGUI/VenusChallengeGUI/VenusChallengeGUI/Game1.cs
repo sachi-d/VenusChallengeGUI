@@ -49,6 +49,12 @@ namespace VenusChallengeGUI
         int leftBoundary;
 
         GameGrid gamegrid;
+
+        internal GameGrid Gamegrid
+        {
+            get { return gamegrid; }
+            set { gamegrid = value; }
+        }
         int cellcount;
 
         int upcount = 0;

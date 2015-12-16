@@ -9,13 +9,12 @@ namespace VenusChallengeGUI
     {
         public MyTank mytank;
         public GameEntity[,] gameGrid;
-        Node mynode;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
         List<string> stones = new List<string>();
         List<string> water = new List<string>();
         List<Tank> tankList = new List<Tank>();
-
+        
         int x;
         int y;
         internal List<Tank> TankList
@@ -49,7 +48,7 @@ namespace VenusChallengeGUI
             mytank.setGrid(this);
             x = 0;
             y = 0;
-            mynode = new Node();
+       //     mynode = new Node();
 
         }
         //public int getCellDistance(){  return cellDistance; }
@@ -62,8 +61,10 @@ namespace VenusChallengeGUI
         {
             //Dog d = new Dog(this.age,this.size);
             //return d;
+           
             return mytank;
         }
+        
         public void setTank(int x, int y)
         {
             gameGrid[x, y] = mytank;
@@ -122,10 +123,7 @@ namespace VenusChallengeGUI
                 Console.WriteLine("\n");
             }
         }
-        public void notifyGameOver()
-        {
-            mynode.getGameOverNotifications(true);
-        }
+     
 
 
         public void setGlobalUpdate(string updatedValues) // once per second server will broadcast all the details about what happend in the gamegrid.

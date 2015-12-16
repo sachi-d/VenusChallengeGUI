@@ -24,6 +24,7 @@ namespace VenusChallengeGUI
         {
             playerName = "CELL";
         }
+        
 
         public override string ToString()
         {

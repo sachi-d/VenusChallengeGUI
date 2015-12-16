@@ -28,9 +28,11 @@ namespace VenusChallengeGUI
         Thread receive_thread;
 
         Game1 game;
+        AI aiNew;
         public Client2()
         {
             InitializeComponent();
+            
             
         }
         public void SetGame(Game1 g)
@@ -42,6 +44,7 @@ namespace VenusChallengeGUI
             SendData("JOIN#");
             startRecieve();
             button1.Enabled = false;
+            aiNew = new AI(game);
         }
 
 

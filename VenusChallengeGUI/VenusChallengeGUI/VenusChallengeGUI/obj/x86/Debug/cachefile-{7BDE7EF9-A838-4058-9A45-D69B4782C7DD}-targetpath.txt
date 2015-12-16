@@ -7,8 +7,8 @@ Content\tank.xnb
 Content\water.xnb
 Content\lifepack.xnb
 Content\coin.xnb
+Content\op0.xnb
 Content\op1.xnb
 Content\op2.xnb
 Content\op3.xnb
 Content\op4.xnb
-Content\op0.xnb
