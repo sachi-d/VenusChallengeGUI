@@ -215,19 +215,19 @@ namespace VenusChallengeGUI
                         case "PP":
                             switch (m.ToString().Substring(2))
                             {
-                                case "00":
+                                case "0":
                                     tex = op0Texture;
                                     break;
-                                case "11":
+                                case "1":
                                     tex = op1Texture;
                                     break;
-                                case "22":
+                                case "2":
                                     tex = op2Texture;
                                     break;
-                                case "33":
+                                case "3":
                                     tex = op3Texture;
                                     break;
-                                case "44":
+                                case "4":
                                     tex = op4Texture;
                                     break;
                                 default:

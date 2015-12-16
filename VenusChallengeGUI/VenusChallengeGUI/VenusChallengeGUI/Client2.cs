@@ -195,7 +195,7 @@ namespace VenusChallengeGUI
             {
                 SendData(x);
                 Console.WriteLine("zzzzzzzzzzzzzzzz---- " + game);
-                game.Communicate(x);
+                //game.Communicate(x);
                 return true;
             }
                 return base.ProcessCmdKey(ref msg, keyData);

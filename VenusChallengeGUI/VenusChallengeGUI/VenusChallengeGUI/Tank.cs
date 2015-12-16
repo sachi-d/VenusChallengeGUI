@@ -165,7 +165,7 @@ namespace VenusChallengeGUI
                 tox -= 1;
             }
 
-            
+
             if (todirection == direction)
             {
                 //check if inside the grid
@@ -175,16 +175,51 @@ namespace VenusChallengeGUI
                 }
                 else
                 {
-                    if (grid.gameGrid[tox, toy].ToString().Equals("CC"))
+                    //string m = grid.gameGrid[tox, toy].ToString().Substring(0, 2);
+                    //if (m.Equals("BB") || m.Equals("SS"))
+                    //{
+                    //    //Console.WriteLine("You are dead!!!!");
+                    //}
+                    //else if (m.Equals("WW"))
+                    //{
+                    //    Console.WriteLine("You are dead!!!!");
+                    //}
+                    //else if (m.Equals("CC"))
+                    //{
+                    //    this.coins++;
+                    //    setGridLocation(tox, toy, direction);
+                    //}
+                    //else if (m.Equals("LP"))
+                    //{
+                    //    this.health++;
+                    //    setGridLocation(tox, toy, direction);
+                    //}
+
+
+                    switch (grid.gameGrid[tox, toy].ToString().Substring(0, 2))
                     {
-                        this.coins++;
+                        case "BB":
+                        case "SS":
+                        case "PP":
+                            break;
+                        case "WW":
+                            Console.WriteLine("You are dead!!!!");
+                            break;
+                        case "CC":
+                            this.coins++;
+                            setGridLocation(tox, toy, direction);
+                            break;
+                        case "LP":
+                            this.health++;
+                            setGridLocation(tox, toy, direction);
+                            break;
+                        default:
+                            setGridLocation(tox, toy, direction);
+                            break;
                     }
-                    if (grid.gameGrid[tox, toy].ToString().Equals("LP"))
-                    {
-                        this.health++;
-                    }
-                    setGridLocation(tox, toy, direction);
                 }
+                
+
             }
             else
             {

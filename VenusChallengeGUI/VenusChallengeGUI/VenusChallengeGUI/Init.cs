@@ -17,8 +17,10 @@ namespace VenusChallengeGUI
             //game = new Game1();
             Thread gui = new Thread(new ThreadStart(StartGUI));
             gui.Start();
+
             Thread form = new Thread(new ThreadStart(StartForm));
             form.Start();
+
             Thread.Sleep(1000);
             cli.SetGame(game);
             

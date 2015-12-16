@@ -42,7 +42,7 @@ namespace VenusChallengeGUI
             {
                 for (int j = 0; j < size; j++)
                 {
-                    gameGrid[i, j] = new GameEntity();
+                    gameGrid[i,j] = new GameEntity();
                 }
             }
             mytank = new MyTank();
@@ -87,19 +87,19 @@ namespace VenusChallengeGUI
             {
                 int q = Int32.Parse(s.Split(',')[0]);
                 int w = Int32.Parse(s.Split(',')[1]);
-                gameGrid[w, q] = new Brick(q, w);
+                gameGrid[q, w] = new Brick(q, w);
             }
             foreach (string s in stones_array)
             {
                 int q = Int32.Parse(s.Split(',')[0]);
                 int w = Int32.Parse(s.Split(',')[1]);
-                gameGrid[w, q] = new Stone(q, w);
+                gameGrid[q, w] = new Stone(q, w);
             }
             foreach (string s in water_array)
             {
                 int q = Int32.Parse(s.Split(',')[0]);
                 int w = Int32.Parse(s.Split(',')[1]);
-                gameGrid[w, q] = new Water(q, w);
+                gameGrid[q, w] = new Water(q, w);
             }
 
         }
@@ -166,8 +166,8 @@ namespace VenusChallengeGUI
                         this.gameGrid[p, q] = new GameEntity();
                     }
                     string[] cl = c[i + 1].Split(';');
-                    y = Int32.Parse(cl[1].ElementAt(0).ToString());
-                    x = Int32.Parse(cl[1].ElementAt(2).ToString());
+                    x = Int32.Parse(cl[1].ElementAt(0).ToString());
+                    y = Int32.Parse(cl[1].ElementAt(2).ToString());
 
                     this.gameGrid[x, y] = mytank;
                 }
@@ -192,7 +192,7 @@ namespace VenusChallengeGUI
                     {
                         tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
                         tankList.Last().globalUpdate(c[i + 1]);
-                        this.gameGrid[u, l] = tankList.Last();
+                        this.gameGrid[l,u] = tankList.Last();
 
                     }
                     else
@@ -244,13 +244,13 @@ namespace VenusChallengeGUI
             Console.WriteLine("coins" + coinmessage);
             //Console.ReadLine();
             coinDetails = coinmessage.Split(':');
-            int coin_y = Int32.Parse(coinDetails[1].Split(',')[0]);
-            int coin_x = Int32.Parse(coinDetails[1].Split(',')[1]);
+            int coin_x = Int32.Parse(coinDetails[1].Split(',')[0]);
+            int coin_y = Int32.Parse(coinDetails[1].Split(',')[1]);
             int LT = Int32.Parse(coinDetails[2]);
             int val = Int32.Parse(coinDetails[3]);
             Coin c = new Coin(coin_x, coin_y, LT, val);
 
-            this.gameGrid[coin_x, coin_y] = new Coin(coin_y, coin_x, LT, val);
+            this.gameGrid[coin_x, coin_y] = new Coin(coin_x, coin_y, LT, val);
 
             // the code that you want to measure comes here
 
@@ -262,10 +262,10 @@ namespace VenusChallengeGUI
             string[] lpDetails = new string[3];
 
             lpDetails = lpmessage.Split(':');
-            int lp_y = Int32.Parse(lpDetails[1].Split(',')[0]);
-            int lp_x = Int32.Parse(lpDetails[1].Split(',')[1]);
+            int lp_x = Int32.Parse(lpDetails[1].Split(',')[0]);
+            int lp_y = Int32.Parse(lpDetails[1].Split(',')[1]);
             int LT = Int32.Parse(lpDetails[2]);
-            this.gameGrid[lp_x, lp_y] = new LifePack(lp_y, lp_x, LT);
+            this.gameGrid[lp_x, lp_y] = new LifePack(lp_x, lp_y, LT);
         }
 
         public void readServerMessage(string message)
