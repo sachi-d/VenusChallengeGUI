@@ -118,6 +118,15 @@
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op4.xnb</Output>
       <Time>2015-12-12T23:33:21.138601+05:30</Time>
     </Item>
+    <Item>
+      <Source>op0.png</Source>
+      <Name>op0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op0.xnb</Output>
+      <Time>2015-12-12T23:33:59.0976295+05:30</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{7BDE7EF9-A838-4058-9A45-D69B4782C7DD}</ContentProjectGUID>

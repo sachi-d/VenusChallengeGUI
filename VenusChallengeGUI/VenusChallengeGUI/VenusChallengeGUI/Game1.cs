@@ -35,6 +35,7 @@ namespace VenusChallengeGUI
         Texture2D tankTexture;
         Texture2D lifepackTexture;
         Texture2D coinTexture;
+        Texture2D op0Texture;
         Texture2D op1Texture;
         Texture2D op2Texture;
         Texture2D op3Texture;
@@ -102,6 +103,7 @@ namespace VenusChallengeGUI
             tankTexture = Content.Load<Texture2D>("tank");
             lifepackTexture = Content.Load<Texture2D>("lifepack");
             coinTexture = Content.Load<Texture2D>("coin");
+            op0Texture = Content.Load<Texture2D>("op0");
             op1Texture = Content.Load<Texture2D>("op1");
             op2Texture = Content.Load<Texture2D>("op2");
             op3Texture = Content.Load<Texture2D>("op3");
@@ -137,7 +139,7 @@ namespace VenusChallengeGUI
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     this.Exit();
 
-                
+
                 base.Update(gameTime);
 
             }
@@ -163,10 +165,10 @@ namespace VenusChallengeGUI
             base.Draw(gameTime);
         }
 
-        private void DrawTank(Tank t,Texture2D tex)
+        private void DrawTank(Tank t, Texture2D tex)
         {
-            Vector2 position = new Vector2(t.x*cellsize + leftBoundary+cellsize/2, t.y*cellsize + topBoundary+cellsize/2);
-            spriteBatch.Draw(tex, position, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 1);
+            Vector2 position = new Vector2(t.x * cellsize + leftBoundary + cellsize / 2, t.y * cellsize + topBoundary + cellsize / 2);
+            spriteBatch.Draw(tex, position, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 0);
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -191,7 +193,9 @@ namespace VenusChallengeGUI
                     GameEntity m = gamegrid.gameGrid[i, j];
                     Vector2 mpos = new Microsoft.Xna.Framework.Vector2(leftBoundary + i * cellsize, topBoundary + j * cellsize);
                     //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiii" + m.ToString());
-                    switch (m.ToString())
+
+
+                    switch (m.ToString().Substring(0, 2))
                     {
                         case "BB":
                             tex = brickTexture;
@@ -208,30 +212,47 @@ namespace VenusChallengeGUI
                         case "LP":
                             tex = lifepackTexture;
                             break;
-                        case "MYTANK":
-                            tex=tankTexture;
-                            break;
-                        case "P1":
-                            tex = op1Texture;
+                        case "PP":
+                            switch (m.ToString().Substring(2))
+                            {
+                                case "00":
+                                    tex = op0Texture;
+                                    break;
+                                case "11":
+                                    tex = op1Texture;
+                                    break;
+                                case "22":
+                                    tex = op2Texture;
+                                    break;
+                                case "33":
+                                    tex = op3Texture;
+                                    break;
+                                case "44":
+                                    tex = op4Texture;
+                                    break;
+                                default:
+                                    tex = tankTexture;
+                                    break;
+                            }
                             break;
 
                         default:
                             tex = cellTexture;
                             break;
                     }
-                    switch (m.ToString())
+                    switch (m.ToString().Substring(0,2))
                     {
-                        case "MYTANK":
-                            DrawTank(gamegrid.mytank, tex);
+                        case "PP":
+                            //spriteBatch.Draw(tex, mpos, Color.White);
+                            //DrawTank(gamegrid.mytank, tex);
+                            spriteBatch.Draw(tex, mpos, Color.White);
                             break;
-                        case "P1":
-                            //DrawTank(gamegrid, tex);
-                            break;
+                        
                         default:
                             spriteBatch.Draw(tex, mpos, Color.White);
                             break;
                     }
-                    
+
                 }
             }
 

@@ -75,6 +75,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+<Compile Include="op0.png">
+      <Name>op0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
 <Compile Include="op1.png">
       <Name>op1</Name>
       <Importer>TextureImporter</Importer>

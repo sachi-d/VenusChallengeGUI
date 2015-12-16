@@ -153,7 +153,7 @@ namespace VenusChallengeGUI
                     Console.WriteLine(c[i + 1]);
 
 
-                    if ((p == x && q == y) || (x == null))
+                    if ((p == x && q == y) )
                     {
 
                     }
@@ -163,7 +163,7 @@ namespace VenusChallengeGUI
                         mytank.prevX = x;
                         mytank.prevY = y;
 
-                        this.gameGrid[p, q] = null;
+                        this.gameGrid[p, q] = new GameEntity();
                     }
                     string[] cl = c[i + 1].Split(';');
                     y = Int32.Parse(cl[1].ElementAt(0).ToString());
@@ -199,11 +199,11 @@ namespace VenusChallengeGUI
                     {
                         tankList[tankIndex].globalUpdate(c[i + 1]);
 
-                        if ((tankList[tankIndex].prevX == u && tankList[tankIndex].prevY == l) || (u == null))
+                        if ((tankList[tankIndex].prevX == u && tankList[tankIndex].prevY == l) )
                         { }
                         else
                         {
-                            this.gameGrid[tankList[tankIndex].prevX, tankList[tankIndex].prevY] = null;
+                            this.gameGrid[tankList[tankIndex].prevX, tankList[tankIndex].prevY] = new GameEntity();
                             tankList[tankIndex].prevX = u;
                             tankList[tankIndex].prevY = l;
                         }

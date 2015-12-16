@@ -259,7 +259,7 @@ namespace VenusChallengeGUI
 
         public override string ToString()
         {
-            return "P" + playerName;
+            return "PP" + playerName;
         }
 
     }
@@ -274,7 +274,7 @@ namespace VenusChallengeGUI
 
         public override string ToString()
         {
-            return "MYTANK";
+            return "PPMY";
         }
 
     }

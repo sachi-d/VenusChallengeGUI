@@ -21,8 +21,10 @@ namespace VenusChallengeGUI
             form.Start();
             Thread.Sleep(1000);
             cli.SetGame(game);
-            Thread aiNew = new Thread(new ThreadStart(startAI));
-            gui.Start();
+            
+            
+            //Thread aiNew = new Thread(new ThreadStart(startAI));
+            //gui.Start();
         }
        
         private void StartGUI()
@@ -36,7 +38,7 @@ namespace VenusChallengeGUI
         }
         private void startAI()
         {
-            ai.TimeElapsed(sender,evt);
+            //ai.TimeElapsed(sender,evt);
         }
         public void StartForm()
         {
