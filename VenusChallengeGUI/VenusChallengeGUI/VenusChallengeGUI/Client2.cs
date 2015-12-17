@@ -26,7 +26,7 @@ namespace VenusChallengeGUI
         int serverPort = 6000;
         int clientPort = 7000;
         Thread receive_thread;
-
+        Thread send_thread;
         Game1 game;
         AI aiNew;
         bool isAIMode;
@@ -47,7 +47,7 @@ namespace VenusChallengeGUI
             button1.Enabled = false;
             if (isAIMode)
             {
-                aiNew = new AI(game,this);
+                aiNew = new AI(game, this);
                 checkBox1.Enabled = false;
             }
         }
@@ -59,6 +59,11 @@ namespace VenusChallengeGUI
             receive_thread = new Thread(new ThreadStart(ReceiveData));
             receive_thread.Start();
         }
+        //public void startSend(String x)
+        //{
+        //    send_thread = new Thread(()=>SendData(x)) ;
+        //    send_thread.Start();
+        //}
         public void ReceiveData()
         {
 
@@ -203,7 +208,7 @@ namespace VenusChallengeGUI
             {
                 SendData(x);
                 Console.WriteLine("zzzzzzzzzzzzzzzz---- " + game);
-                //game.Communicate(x);
+                game.Communicate(x);
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);

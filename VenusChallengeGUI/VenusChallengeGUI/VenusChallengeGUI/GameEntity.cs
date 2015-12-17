@@ -7,7 +7,7 @@ using System.Text;
 
 namespace VenusChallengeGUI
 {
-     class GameEntity
+    class GameEntity
     {
         public int x; //horizontal position
         public int y; //vertical position
@@ -24,11 +24,17 @@ namespace VenusChallengeGUI
         {
             playerName = "CELL";
         }
-        
+        public GameEntity returnObj(int p, int q)
+        {
+            this.x = p;
+            this.y = q;
+            return this;
+        }
 
         public override string ToString()
         {
             return playerName;
         }
     }
+
 }

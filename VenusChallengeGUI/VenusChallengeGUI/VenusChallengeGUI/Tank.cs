@@ -84,7 +84,7 @@ namespace VenusChallengeGUI
             y = Int32.Parse(message[3]);
             direction = Int32.Parse(message[4]);
             setPlayerName(message[1].ElementAt(1).ToString());
-            setGridLocation(x, y, 4);
+            setGridLocation(x, y, 7);
             //this.pos = new Vector2(grid.leftBound+x,grid.upperBound+y);
             //this.rotationPoint = new Vector2(grid.CellDistance / 2, grid.CellDistance / 2);
             Console.Write(grid.GetGrid()[x, y].ToString() + " ");
@@ -94,11 +94,12 @@ namespace VenusChallengeGUI
             Console.WriteLine("HELLOOO");
         }
 
-        public void setGridLocation(int newx, int newy, int direction)
+        public void setGridLocation(int newx, int newy, int direc)
         {
             int prex = newx;
             int prey = newy;
-            switch (direction)   //change the cell the tank was previously residing to a normal cell 0123=NESW
+
+            switch (direc)   //change the cell the tank was previously residing to a normal cell 0123=NESW
             {
                 case 0:
                     prey = newy + 1;
@@ -218,7 +219,7 @@ namespace VenusChallengeGUI
                             break;
                     }
                 }
-                
+
 
             }
             else
@@ -313,6 +314,8 @@ namespace VenusChallengeGUI
         }
 
     }
+
+
 
 
 }

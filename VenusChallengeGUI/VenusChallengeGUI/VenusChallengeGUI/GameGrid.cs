@@ -9,12 +9,13 @@ namespace VenusChallengeGUI
     {
         public MyTank mytank;
         private GameEntity[,] gameGrid;
+        public bool isGridSet;
         int[,] damgesLevel = new int[10, 10];
         List<string> bricks = new List<string>();
         List<string> stones = new List<string>();
         List<string> water = new List<string>();
         List<Tank> tankList = new List<Tank>();
-        
+
         int x;
         int y;
         internal List<Tank> TankList
@@ -41,14 +42,15 @@ namespace VenusChallengeGUI
             {
                 for (int j = 0; j < size; j++)
                 {
-                    gameGrid[i,j] = new GameEntity();
+                    gameGrid[i, j] = new GameEntity();
                 }
             }
             mytank = new MyTank();
             mytank.setGrid(this);
             x = 0;
             y = 0;
-       //     mynode = new Node();
+            isGridSet = false;
+            //     mynode = new Node();
 
         }
         //public int getCellDistance(){  return cellDistance; }
@@ -58,17 +60,19 @@ namespace VenusChallengeGUI
         //public void setUpperBound(int v) { upperBound = v; }
         //public void setLeftBound(int v) { leftBound = v; }
 
-        public GameEntity[,] GetGrid(){
+        public GameEntity[,] GetGrid()
+        {
             return this.gameGrid;
         }
         public Tank GetTank()
         {
             //Dog d = new Dog(this.age,this.size);
             //return d;
-           
+
             return mytank;
         }
-        
+
+
         public void setTank(int x, int y)
         {
             gameGrid[x, y] = mytank;
@@ -127,7 +131,7 @@ namespace VenusChallengeGUI
                 Console.WriteLine("\n");
             }
         }
-     
+
 
 
         public void setGlobalUpdate(string updatedValues) // once per second server will broadcast all the details about what happend in the gamegrid.
@@ -155,7 +159,7 @@ namespace VenusChallengeGUI
                     Console.WriteLine(c[i + 1]);
 
 
-                    if ((p == x && q == y) )
+                    if ((p == x && q == y))
                     {
 
                     }
@@ -170,8 +174,9 @@ namespace VenusChallengeGUI
                     string[] cl = c[i + 1].Split(';');
                     x = Int32.Parse(cl[1].ElementAt(0).ToString());
                     y = Int32.Parse(cl[1].ElementAt(2).ToString());
-
-                    this.gameGrid[x, y] = mytank;
+                    mytank.setDirection(Int32.Parse(cl[2]));
+                    //this.gameGrid[x, y] = mytank;
+                    mytank.setGridLocation(x, y, 9);
                 }
                 else
                 {
@@ -194,14 +199,14 @@ namespace VenusChallengeGUI
                     {
                         tankList.Add(new Tank(cl[0].ElementAt(1).ToString()));
                         tankList.Last().globalUpdate(c[i + 1]);
-                        this.gameGrid[l,u] = tankList.Last();
+                        this.gameGrid[l, u] = tankList.Last();
 
                     }
                     else
                     {
                         tankList[tankIndex].globalUpdate(c[i + 1]);
 
-                        if ((tankList[tankIndex].prevX == u && tankList[tankIndex].prevY == l) )
+                        if ((tankList[tankIndex].prevX == u && tankList[tankIndex].prevY == l))
                         { }
                         else
                         {
@@ -286,6 +291,8 @@ namespace VenusChallengeGUI
                 Console.Write("Game initialised\n");
                 s = "Game initialised\n";
                 setMapDetails(message);
+                isGridSet = true;
+
             }
             else if (message[0] == 'G')
             {
@@ -325,5 +332,7 @@ namespace VenusChallengeGUI
         }
 
     }
+
+
 
 }

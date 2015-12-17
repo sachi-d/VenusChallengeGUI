@@ -174,7 +174,9 @@ namespace VenusChallengeGUI
         private void DrawTank(Tank t, Texture2D tex)
         {
             Vector2 position = new Vector2(t.x * cellsize + leftBoundary + cellsize / 2, t.y * cellsize + topBoundary + cellsize / 2);
-            spriteBatch.Draw(tex, position, null, Color.White, t.angle, t.rotationPoint, 1, SpriteEffects.None, 0);
+            //Vector2 rotationpoint = new Vector2(position.X + 30, position.Y + 30);
+            Vector2 rotationpoint = new Vector2(30, 30);
+            spriteBatch.Draw(tex, position, null, Color.White, t.angle, rotationpoint, 1, SpriteEffects.None, 0);
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -246,14 +248,14 @@ namespace VenusChallengeGUI
                             tex = cellTexture;
                             break;
                     }
-                    switch (m.ToString().Substring(0,2))
+                    switch (m.ToString().Substring(0, 2))
                     {
                         case "PP":
                             //spriteBatch.Draw(tex, mpos, Color.White);
                             DrawTank(gamegrid.mytank, tex);
                             //spriteBatch.Draw(tex, mpos, Color.White);
                             break;
-                        
+
                         default:
                             spriteBatch.Draw(tex, mpos, Color.White);
                             break;
@@ -277,4 +279,5 @@ namespace VenusChallengeGUI
                 gamegrid.mytank.move("RIGHT#");
         }
     }
+
 }
