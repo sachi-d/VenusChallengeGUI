@@ -74,32 +74,14 @@ namespace VenusChallengeGUI
             direction = dir;
         }
 
-        public void setLocation(String l) // Go to the initial setup location.
-        {
-            l = l.Remove(l.Length - 2); //remove trailing # and ?
+        
 
-            string[] message = new string[5];
-            message = l.Split(':', ';', ',');
-            x = Int32.Parse(message[2]);
-            y = Int32.Parse(message[3]);
-            direction = Int32.Parse(message[4]);
-            setPlayerName(message[1].ElementAt(1).ToString());
-            setGridLocation(x, y, 7);
-            //this.pos = new Vector2(grid.leftBound+x,grid.upperBound+y);
-            //this.rotationPoint = new Vector2(grid.CellDistance / 2, grid.CellDistance / 2);
-            Console.Write(grid.GetGrid()[x, y].ToString() + " ");
-            //   Console.ReadLine();
-            //Console.WriteLine("x: {0}", x);
-            //Console.WriteLine("y: {0}", y);
-            Console.WriteLine("HELLOOO");
-        }
-
-        public void setGridLocation(int newx, int newy, int direc)
+        public void setGridLocation(int newx, int newy)
         {
             int prex = newx;
             int prey = newy;
 
-            switch (direc)   //change the cell the tank was previously residing to a normal cell 0123=NESW
+            switch (direction)   //change the cell the tank was previously residing to a normal cell 0123=NESW
             {
                 case 0:
                     prey = newy + 1;
@@ -114,9 +96,14 @@ namespace VenusChallengeGUI
                     prex = newx + 1;
                     break;
             }
-            grid.GetGrid()[newx, newy] = this;
-            grid.GetGrid()[prex, prey] = new GameEntity();   //celltexture
-            pos = new Vector2(newx, newy);
+            if (!(newx < 0 || newx > 9 || newy > 9 || newy < 0))
+            {
+                grid.GetGrid()[newx, newy] = this;
+            }
+            if (!(prex < 0 || prex > 9 || prey > 9 || prey < 0))
+            {
+                grid.GetGrid()[prex, prey] = new GameEntity();   //celltexture
+            }
             x = newx;
             y = newy;
         }
@@ -208,14 +195,14 @@ namespace VenusChallengeGUI
                             break;
                         case "CC":
                             this.coins++;
-                            setGridLocation(tox, toy, direction);
+                            //setGridLocation(tox, toy, direction);
                             break;
                         case "LP":
                             this.health++;
-                            setGridLocation(tox, toy, direction);
+                            //setGridLocation(tox, toy, direction);
                             break;
                         default:
-                            setGridLocation(tox, toy, direction);
+                            //setGridLocation(tox, toy, direction);
                             break;
                     }
                 }
@@ -296,6 +283,10 @@ namespace VenusChallengeGUI
         public override string ToString()
         {
             return "PP" + playerName;
+        }
+        public int getPlayerDigit()
+        {
+            return Int32.Parse(this.playerName);
         }
 
     }

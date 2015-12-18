@@ -176,7 +176,7 @@ namespace VenusChallengeGUI
             Vector2 position = new Vector2(t.x * cellsize + leftBoundary + cellsize / 2, t.y * cellsize + topBoundary + cellsize / 2);
             //Vector2 rotationpoint = new Vector2(position.X + 30, position.Y + 30);
             Vector2 rotationpoint = new Vector2(30, 30);
-            spriteBatch.Draw(tex, position, null, Color.White, t.angle, rotationpoint, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(tex, position, null, Color.White, t.angle, rotationpoint, 1, SpriteEffects.None, 1);
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -202,82 +202,79 @@ namespace VenusChallengeGUI
                     Vector2 mpos = new Microsoft.Xna.Framework.Vector2(leftBoundary + i * cellsize, topBoundary + j * cellsize);
                     //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiii" + m.ToString());
 
-
-                    switch (m.ToString().Substring(0, 2))
+                    string field = m.ToString().Substring(0, 2);
+                    if (field.Equals("BB"))
                     {
-                        case "BB":
-                            tex = brickTexture;
-                            break;
-                        case "SS":
-                            tex = stoneTexture;
-                            break;
-                        case "WW":
-                            tex = waterTexture;
-                            break;
-                        case "CC":
-                            tex = coinTexture;
-                            break;
-                        case "LP":
-                            tex = lifepackTexture;
-                            break;
-                        case "PP":
-                            switch (m.ToString().Substring(2))
-                            {
-                                case "0":
-                                    tex = op0Texture;
-                                    break;
-                                case "1":
-                                    tex = op1Texture;
-                                    break;
-                                case "2":
-                                    tex = op2Texture;
-                                    break;
-                                case "3":
-                                    tex = op3Texture;
-                                    break;
-                                case "4":
-                                    tex = op4Texture;
-                                    break;
-                                default:
-                                    tex = tankTexture;
-                                    break;
-                            }
-                            break;
-
-                        default:
-                            tex = cellTexture;
-                            break;
+                        tex = brickTexture;
+                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
-                    switch (m.ToString().Substring(0, 2))
+                    else if (field.Equals("SS"))
                     {
-                        case "PP":
-                            //spriteBatch.Draw(tex, mpos, Color.White);
+                        tex = stoneTexture;
+                        spriteBatch.Draw(tex, mpos, Color.White);
+                    }
+                    else if (field.Equals("WW"))
+                    {
+                        tex = waterTexture;
+                        spriteBatch.Draw(tex, mpos, Color.White);
+                    }
+                    else if (field.Equals("CC"))
+                    {
+                        tex = coinTexture;
+                        spriteBatch.Draw(tex, mpos, Color.White);
+                    }
+                    else if (field.Equals("LP"))
+                    {
+                        tex = lifepackTexture;
+                        spriteBatch.Draw(tex, mpos, Color.White);
+                    }
+                    else if (field.Equals("PP"))
+                    {
+                        string subfield = m.ToString().Substring(2, 1);
+                        if (subfield.Equals("M"))
+                        {
+                            tex = tankTexture;
                             DrawTank(gamegrid.mytank, tex);
-                            //spriteBatch.Draw(tex, mpos, Color.White);
-                            break;
+                        }
+                        else if (subfield.Equals("0"))
+                        {
+                            tex = op0Texture;
+                            DrawTank(gamegrid.TankList[0], tex);
+                        }
+                        else if (subfield.Equals("1"))
+                        {
+                            tex = op1Texture;
+                            DrawTank(gamegrid.TankList[1], tex);
+                        }
+                        else if (subfield.Equals("2"))
+                        {
+                            tex = op2Texture;
+                            DrawTank(gamegrid.TankList[2], tex);
+                        }
+                        else if (subfield.Equals("3"))
+                        {
+                            tex = op3Texture;
+                            DrawTank(gamegrid.TankList[3], tex);
+                        }
+                        else if (subfield.Equals("4"))
+                        {
+                            tex = op4Texture;
+                            DrawTank(gamegrid.TankList[4], tex);
+                        }
 
-                        default:
-                            spriteBatch.Draw(tex, mpos, Color.White);
-                            break;
                     }
-
+                    else
+                    {
+                        tex = cellTexture;
+                        //spriteBatch.Draw(tex, mpos, Color.White);
+                        spriteBatch.Draw(tex, mpos, null, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                    }
                 }
             }
 
         }
 
-        public void Communicate(string msg)
-        {
-            gamegrid.updateLocalMoves(msg);
-        }
-        public void ProcessKey()
-        {
-            KeyboardState keybState = Keyboard.GetState();
-            if (keybState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left))
-                gamegrid.mytank.move("LEFT#");
-            if (keybState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right))
-                gamegrid.mytank.move("RIGHT#");
-        }
+   
     }
 
 }
