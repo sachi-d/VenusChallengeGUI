@@ -176,7 +176,9 @@ namespace VenusChallengeGUI
             Vector2 position = new Vector2(t.x * cellsize + leftBoundary + cellsize / 2, t.y * cellsize + topBoundary + cellsize / 2);
             //Vector2 rotationpoint = new Vector2(position.X + 30, position.Y + 30);
             Vector2 rotationpoint = new Vector2(30, 30);
+            spriteBatch.Draw(cellTexture, position, null, Color.White, 0, rotationpoint, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(tex, position, null, Color.White, t.angle, rotationpoint, 1, SpriteEffects.None, 1);
+            
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -261,13 +263,12 @@ namespace VenusChallengeGUI
                             tex = op4Texture;
                             DrawTank(gamegrid.TankList[4], tex);
                         }
-
+                        
                     }
                     else
                     {
                         tex = cellTexture;
-                        //spriteBatch.Draw(tex, mpos, Color.White);
-                        spriteBatch.Draw(tex, mpos, null, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
                 }
             }

@@ -65,7 +65,7 @@ namespace VenusChallengeGUI
         {
             return this.gameGrid;
         }
-        public Tank GetTank()
+        public MyTank GetTank()
         {
             //Dog d = new Dog(this.age,this.size);
             //return d;
@@ -203,15 +203,17 @@ namespace VenusChallengeGUI
             for (int c = 1; c < message.Length; c++)
             {
                 Tank ttt;
-                if (c != mytank.getPlayerDigit())
+                if (c == mytank.getPlayerDigit()+1)
+                {
+                    ttt = mytank;
+                    Console.WriteLine("mytank---------------------");
+                }
+                else
                 {
                     ttt = new Tank();
                     ttt.setPlayerName(message[1].ElementAt(1).ToString());
                     ttt.setGrid(this);
-                }
-                else
-                {
-                    ttt = mytank;
+                    Console.WriteLine("new tank---------------------");
                 }
                 string[] myplayer = new string[4];
                 myplayer = message[ttt.getPlayerDigit() + 1].Split(';', ',');

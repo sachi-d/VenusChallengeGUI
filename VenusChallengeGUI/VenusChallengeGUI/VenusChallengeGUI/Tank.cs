@@ -50,6 +50,10 @@ namespace VenusChallengeGUI
         {
             this.grid = g;
         }
+        public GameEntity[,] getGrid()
+        {
+            return this.grid.GetGrid();
+        }
         public void setPlayerName(String l)
         {
             playerName = l;
@@ -294,9 +298,52 @@ namespace VenusChallengeGUI
     class MyTank : Tank
     {
 
-        public void shoot()
+        public int getShootLength()
         {
+            int count = 0;
+            int x1 = 0;
+            int y1 = 0;
+            switch (direction)
+            {
+                case 0:
+                    x1 = 0;
+                    y1 = -1;
+                    break;
+                case 1:
+                    x1 =+1;
+                    y1 = 0;
+                    break;
+                case 2:
+                    x1 = 0;
+                    y1 = +1;
+                    break;
+                case 3:
+                    x1 = -1;
+                    y1 = 0;
+                    break;
+            }
 
+            while (count <= 9 && x+x1<=9 && y+y1<=9 && x+x1>=0 && y+y1>=0)
+            {
+                string s=this.getGrid()[x + x1, y + y1].ToString().Substring(0,2);
+                if (s.Equals("BB") || s.Equals("PP") || s.Equals("SS"))
+                {
+                    break;
+                }
+                else
+                {
+                    count++;
+                    if (x1 != 0)
+                    {
+                        x1++;
+                    }
+                    else
+                    {
+                        y1++;
+                    }
+                }
+            }
+            return count;
         }
 
         public override string ToString()
