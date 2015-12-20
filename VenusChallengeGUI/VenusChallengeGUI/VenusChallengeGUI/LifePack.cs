@@ -7,7 +7,7 @@ namespace VenusChallengeGUI
 {
     class LifePack : GameEntity
     {
-        public int lifetime;
+       int lifetime;
         public LifePack(int xx, int yy, int lt)
             : base(xx, yy)
         {
@@ -15,6 +15,15 @@ namespace VenusChallengeGUI
             y = yy;
             lifetime = lt;
             playerName = "LP";
+        }
+
+        public int getLifeTime()
+        {
+            return lifetime;
+        }
+        public void setLifeTime(int c)
+        {
+            lifetime = c;
         }
         public void updateRandom()
         {

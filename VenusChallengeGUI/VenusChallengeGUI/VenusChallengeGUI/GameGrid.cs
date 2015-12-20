@@ -17,6 +17,7 @@ namespace VenusChallengeGUI
         List<string> water = new List<string>();
         List<Tank> tankList = new List<Tank>();
 
+        Timer disTimer;
         int x;
         int y;
         internal List<Tank> TankList
@@ -190,9 +191,19 @@ namespace VenusChallengeGUI
         }
         public void processLifeTime(LifePack en)
         {
-            Timer timer = new Timer();
-            timer.Interval = en.lifetime;
+            disTimer = new System.Timers.Timer();
+            disTimer.Elapsed += (source, e) => OnTimedEvent(source, e, en); 
+
+            disTimer.Interval = en.getLifeTime();
+
+            disTimer.Enabled = true;
             //timer.Elapsed = new ElapsedEventHandler();
+        }
+        private void OnTimedEvent(object source, ElapsedEventArgs e,LifePack p)
+        {
+            this.gameGrid[p.x, p.y] = new GameEntity();
+            
+            disTimer.Enabled = false;
         }
         public void setLocation(string l) // Go to the initial setup location.
         {

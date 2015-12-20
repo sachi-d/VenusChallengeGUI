@@ -14,7 +14,7 @@ namespace VenusChallengeGUI
         {
             x = xx;
             y = yy;
-            lifetime = lt;
+            this.setLifeTime(lt);
             value = val;
             playerName = "CC";
         }
