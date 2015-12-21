@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace VenusChallengeGUI
         static void Main(string[] args)
         {
             Init initialiseGame = new Init();
+            
         }
     }
 #endif

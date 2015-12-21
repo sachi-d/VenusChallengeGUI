@@ -202,7 +202,8 @@ namespace VenusChallengeGUI
             else if (keyData == Keys.Space)
             {
                 x = "SHOOT#";
-                Console.WriteLine("shoot length-"+game.Gamegrid.GetTank().getShootLength());
+                game.setShooting(true);
+                game.DrawBullets();
             }
 
             if (!x.Equals("null"))

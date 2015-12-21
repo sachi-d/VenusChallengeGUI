@@ -18,5 +18,13 @@ namespace VenusChallengeGUI
         {
 
         }
+        public int getHealth()
+        {
+            return health;
+        }
+        public void setHealth(int h)
+        {
+            this.health = h;
+        }
     }
 }

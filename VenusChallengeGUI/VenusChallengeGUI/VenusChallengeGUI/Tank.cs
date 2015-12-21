@@ -18,7 +18,7 @@ namespace VenusChallengeGUI
         public bool status;
         public float angle;
         public int direction;
-        public Vector2 rotationPoint = new Vector2(30, 30);
+        public Vector2 dirpos;
         GameGrid grid;//the game grid this tank belongs to
         String respond;
         public Tank()
@@ -60,22 +60,33 @@ namespace VenusChallengeGUI
         }
         public void setDirection(int dir)
         {
+            angle = dir * (MathHelper.ToRadians(90));
+            direction = dir;
+            int m, n;
             switch (dir)
             {
                 case 0:
-                    angle = MathHelper.ToRadians(0);
+                    m = 0;
+                    n = -1;
                     break;
                 case 1:
-                    angle = MathHelper.ToRadians(90);
+                    m = +1;
+                    n = 0;
                     break;
                 case 2:
-                    angle = MathHelper.ToRadians(180);
+                    m = 0;
+                    n = +1;
                     break;
                 case 3:
-                    angle = MathHelper.ToRadians(270);
+                    m = -1;
+                    n = 0;
+                    break;
+                default:
+                    m = 0;
+                    n = 0;
                     break;
             }
-            direction = dir;
+            dirpos = new Vector2(m, n);
         }
 
         
@@ -297,35 +308,26 @@ namespace VenusChallengeGUI
 
     class MyTank : Tank
     {
+        bool isShooting;
+        public Vector2 bulletpos;
+
+        public void setShooting(bool m)
+        {
+            isShooting = m;
+        }
+        public bool getShooting()
+        {
+            return isShooting;
+        }
 
         public int getShootLength()
         {
             int count = 0;
-            int x1 = 0;
-            int y1 = 0;
-            switch (direction)
-            {
-                case 0:
-                    x1 = 0;
-                    y1 = -1;
-                    break;
-                case 1:
-                    x1 =+1;
-                    y1 = 0;
-                    break;
-                case 2:
-                    x1 = 0;
-                    y1 = +1;
-                    break;
-                case 3:
-                    x1 = -1;
-                    y1 = 0;
-                    break;
-            }
+            Vector2 nn = new Vector2(x, y) + dirpos;
 
-            while (count <= 9 && x+x1<=9 && y+y1<=9 && x+x1>=0 && y+y1>=0)
+            while (count <= 9 && nn.X<=9 && nn.Y<=9 && nn.X>=0 && nn.Y>=0)
             {
-                string s=this.getGrid()[x + x1, y + y1].ToString().Substring(0,2);
+                string s=this.getGrid()[(int)nn.X, (int)nn.Y].ToString().Substring(0,2);
                 if (s.Equals("BB") || s.Equals("PP") || s.Equals("SS"))
                 {
                     break;
@@ -333,13 +335,13 @@ namespace VenusChallengeGUI
                 else
                 {
                     count++;
-                    if (x1 != 0)
+                    if (dirpos.X != 0)
                     {
-                        x1++;
+                        nn.X++;
                     }
                     else
                     {
-                        y1++;
+                        nn.Y++;
                     }
                 }
             }

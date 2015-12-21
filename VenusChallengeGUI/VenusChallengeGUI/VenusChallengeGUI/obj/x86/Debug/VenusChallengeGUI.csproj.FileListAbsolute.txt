@@ -50,3 +50,7 @@ D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x
 D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.csproj.GenerateResource.Cache
 D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.exe
 D:\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\obj\x86\Debug\VenusChallengeGUI.pdb
+C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick1.xnb
+C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick2.xnb
+C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick3.xnb
+C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\bullet.xnb

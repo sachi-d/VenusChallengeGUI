@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\lifepack.xnb</Output>
-      <Time>2015-12-08T17:12:34.4118098+05:30</Time>
+      <Time>2015-12-20T17:56:56.8349497+05:30</Time>
     </Item>
     <Item>
       <Source>coin.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\coin.xnb</Output>
-      <Time>2015-12-08T17:12:34.424818+05:30</Time>
+      <Time>2015-12-20T17:56:49.8778268+05:30</Time>
     </Item>
     <Item>
       <Source>op0.png</Source>
@@ -126,6 +126,42 @@
       <Options>None</Options>
       <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\op4.xnb</Output>
       <Time>2015-12-12T23:33:21.138601+05:30</Time>
+    </Item>
+    <Item>
+      <Source>brick1.png</Source>
+      <Name>brick1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick1.xnb</Output>
+      <Time>2015-12-20T10:07:21.2424658+05:30</Time>
+    </Item>
+    <Item>
+      <Source>brick2.png</Source>
+      <Name>brick2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick2.xnb</Output>
+      <Time>2015-12-20T10:07:40.8174407+05:30</Time>
+    </Item>
+    <Item>
+      <Source>brick3.png</Source>
+      <Name>brick3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\brick3.xnb</Output>
+      <Time>2015-12-20T10:07:53.0686977+05:30</Time>
+    </Item>
+    <Item>
+      <Source>bullet.png</Source>
+      <Name>bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Sachi\Documents\GitHub\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\VenusChallengeGUI\bin\x86\Debug\Content\bullet.xnb</Output>
+      <Time>2015-12-20T18:02:53.8543818+05:30</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

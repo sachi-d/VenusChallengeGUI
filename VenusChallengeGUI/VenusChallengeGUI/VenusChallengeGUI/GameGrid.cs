@@ -66,13 +66,7 @@ namespace VenusChallengeGUI
         {
             return this.gameGrid;
         }
-        public MyTank GetTank()
-        {
-            //Dog d = new Dog(this.age,this.size);
-            //return d;
-
-            return mytank;
-        }
+        
         public void setMapDetails(String m) //add received map data in to the game grid
         {
             m = m.Remove(m.Length - 2);
@@ -128,9 +122,8 @@ namespace VenusChallengeGUI
             updatedValues = updatedValues.Remove(updatedValues.Length - 2);
             string[] c = updatedValues.Split(':');
             //Console.Write(updatedValues);
-            int p = mytank.prevX;
-            int q = mytank.prevY;
-            // updateDamages(c[c.Length - 1]);
+            //Console.WriteLine("damage levs- " + c[c.Length - 1]);
+            updateDamages(c[c.Length - 1]);
             IDictionary<string, Tank> col = new Dictionary<string, Tank>();
             for (int i = 0; i < c.Length - 2; i++)
             {
@@ -149,13 +142,20 @@ namespace VenusChallengeGUI
 
         public void updateDamages(string command)
         {
-            List<string> damages = new List<string>();
-            damages.AddRange(command.Split(';'));
-            foreach (string s in damages)
+            string[] dam = command.Split(';');
+            for (int i = 0; i < dam.Length; i++)
             {
-                int c = Int32.Parse(s.Split(';')[0]);
-                int d = Int32.Parse(s.Split(';')[1]);
-                damgesLevel[c, d] = Int32.Parse(s.Split(';')[2]);
+                int aa = Int32.Parse(dam[i].Split(',')[0]);
+                int bb = Int32.Parse(dam[i].Split(',')[1]);
+                int cc = Int32.Parse(dam[i].Split(',')[2]);
+                if(this.gameGrid[aa, bb].ToString().Equals("BB")){
+                    Brick b = (Brick)this.gameGrid[aa, bb];
+                    b.setHealth(cc);
+                }
+                //if (cc == 4)
+                //{
+                //    this.gameGrid[aa, bb] = new GameEntity();
+                //}
             }
         }
         public void getCoinsDetails(string coinmessage)

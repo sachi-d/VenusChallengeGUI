@@ -28,7 +28,10 @@ namespace VenusChallengeGUI
 
         Texture2D backgroundTexture;
         Texture2D cellTexture;
-        Texture2D brickTexture;
+        Texture2D brickTexture;     //  0 damage
+        Texture2D brick1Texture;    //  25% damage
+        Texture2D brick2Texture;    //  50%damage
+        Texture2D brick3Texture;    //  75% damage
         Texture2D stoneTexture;
         Texture2D waterTexture;
         Texture2D foregroundTexture;
@@ -40,6 +43,7 @@ namespace VenusChallengeGUI
         Texture2D op2Texture;
         Texture2D op3Texture;
         Texture2D op4Texture;
+        Texture2D bulletTexture;
 
         int screenWidth = 1200; //FIXED BACKGROUND WIDTH
         int screenHeight = 675;   //FIXED BACKGROUNDHEIGHT
@@ -49,6 +53,7 @@ namespace VenusChallengeGUI
         int leftBoundary;
 
         GameGrid gamegrid;
+        Vector2 rotationpoint = new Vector2(30, 30);
 
         internal GameGrid Gamegrid
         {
@@ -104,6 +109,9 @@ namespace VenusChallengeGUI
             foregroundTexture = Content.Load<Texture2D>("foreground");
             cellTexture = Content.Load<Texture2D>("cell");
             brickTexture = Content.Load<Texture2D>("brick");
+            brick1Texture = Content.Load<Texture2D>("brick1");
+            brick2Texture = Content.Load<Texture2D>("brick2");
+            brick3Texture = Content.Load<Texture2D>("brick3");
             stoneTexture = Content.Load<Texture2D>("stone");
             waterTexture = Content.Load<Texture2D>("water");
             tankTexture = Content.Load<Texture2D>("tank");
@@ -114,6 +122,7 @@ namespace VenusChallengeGUI
             op2Texture = Content.Load<Texture2D>("op2");
             op3Texture = Content.Load<Texture2D>("op3");
             op4Texture = Content.Load<Texture2D>("op4");
+            bulletTexture = Content.Load<Texture2D>("bullet");
             //gamegrid.mytank.angle = 0;
             //screenWidth = device.PresentationParameters.BackBufferWidth;
             //screenHeight = device.PresentationParameters.BackBufferHeight;
@@ -165,7 +174,10 @@ namespace VenusChallengeGUI
             spriteBatch.Begin();
             DrawScenery();
             DrawCells();
+            DrawBullets();
             DrawBars();
+            
+
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -175,10 +187,10 @@ namespace VenusChallengeGUI
         {
             Vector2 position = new Vector2(t.x * cellsize + leftBoundary + cellsize / 2, t.y * cellsize + topBoundary + cellsize / 2);
             //Vector2 rotationpoint = new Vector2(position.X + 30, position.Y + 30);
-            Vector2 rotationpoint = new Vector2(30, 30);
+
             spriteBatch.Draw(cellTexture, position, null, Color.White, 0, rotationpoint, 1, SpriteEffects.None, 0);
             spriteBatch.Draw(tex, position, null, Color.White, t.angle, rotationpoint, 1, SpriteEffects.None, 1);
-            
+
         }
         public void readMessage(String m) { gamegrid.readServerMessage(m); }
 
@@ -201,34 +213,51 @@ namespace VenusChallengeGUI
                 for (int j = 0; j < gamegrid.size; j++)
                 {
                     GameEntity m = gamegrid.GetGrid()[i, j];
+                    m.pos = new Vector2(i, j);
                     Vector2 mpos = new Microsoft.Xna.Framework.Vector2(leftBoundary + i * cellsize, topBoundary + j * cellsize);
                     //Console.WriteLine("iiiiiiiiiiiiiiiiiiiiii" + m.ToString());
 
                     string field = m.ToString().Substring(0, 2);
                     if (field.Equals("BB"))
                     {
-                        tex = brickTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
+                        Brick b = (Brick)m;
+                        if (b.getHealth() == 1)
+                        {
+                            tex = brick1Texture;
+                        }
+                        else if (b.getHealth() == 2)
+                        {
+                            tex = brick2Texture;
+                        }
+                        else if (b.getHealth() == 3)
+                        {
+                            tex = brick3Texture;
+                        }
+                        else if (b.getHealth() == 4)
+                        {
+                            tex = cellTexture;
+                        }
+                        else
+                        {
+                            tex = brickTexture;
+                        }
+
                     }
                     else if (field.Equals("SS"))
                     {
                         tex = stoneTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
                     else if (field.Equals("WW"))
                     {
                         tex = waterTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
                     else if (field.Equals("CC"))
                     {
                         tex = coinTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
                     else if (field.Equals("LP"))
                     {
                         tex = lifepackTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
                     else if (field.Equals("PP"))
                     {
@@ -263,19 +292,39 @@ namespace VenusChallengeGUI
                             tex = op4Texture;
                             DrawTank(gamegrid.TankList[4], tex);
                         }
-                        
+                        continue;
                     }
                     else
                     {
                         tex = cellTexture;
-                        spriteBatch.Draw(tex, mpos, Color.White);
                     }
+                    spriteBatch.Draw(tex, mpos, Color.White);
                 }
             }
 
         }
 
-   
+        public void DrawBullets()
+        {
+            if (gamegrid.mytank.getShooting())
+            {
+                gamegrid.mytank.bulletpos += gamegrid.mytank.dirpos;
+                spriteBatch.Draw(bulletTexture, gamegrid.mytank.bulletpos, null, Color.White, gamegrid.mytank.angle, rotationpoint, 1, SpriteEffects.None, 1);
+                //WAIT FOR 1/3 SECONDS
+            }
+            if (gamegrid.mytank.bulletpos == (gamegrid.mytank.pos + (gamegrid.mytank.dirpos * gamegrid.mytank.getShootLength())))
+            {
+                gamegrid.mytank.bulletpos = gamegrid.mytank.pos;
+                setShooting(false);
+            }
+        }
+        
+        public void setShooting(bool m)
+        {
+            gamegrid.mytank.bulletpos = gamegrid.mytank.pos;
+            gamegrid.mytank.setShooting(m);
+        }
+
     }
 
 }
